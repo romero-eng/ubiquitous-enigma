@@ -35,21 +35,22 @@
                                                         e^{j2\angle{x}^{\circ}} \\
                                                         e^{j\angle{x}^{\circ}} \\
                                                         1
-                                                      \end{bmatrix}
+                                                      \end{bmatrix} \quad , \quad \\ \\
+            &= \vec{m}^{T}\vec{e^{j\angle{x}^{\circ}}} \quad , \quad \vec{m} \equiv \vec{c} \odot \vec{|x|} 
 \end{align*}
 
 \begin{align*}
     \Big|f_{N}(x)\Big|^{2}&= f_{N}(x)f^{*}_{N}(x) \\ \\
-                          &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\vec{e^{j\angle{x}^{\circ}}}\vec{e^{-j\angle{x}^{\circ}}}^{T}\Big(\vec{c} \odot \vec{|x|}\Big) \\ \\
-                          &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\Bigg(I_{N} + \sum_{n=1}^{N - 1}\Big(e^{nj\angle{x}^{\circ}}U_{N, n} + e^{-nj\angle{x}^{\circ}}U_{N, n}^{T}\Big)\Bigg)\Big(\vec{c} \odot \vec{|x|}\Big) \quad , \quad U_{N, n} \equiv \begin{bmatrix}
-                                                                                                                                                                                                                                                            0_{N - n, n} & I_{N - n} \\ \\
-                                                                                                                                                                                                                                                            0_{n} & 0_{n, N - n}
-                                                                                                                                                                                                                                                          \end{bmatrix} \\ \\
-                          &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}I_{N}\Big(\vec{c} \odot \vec{|x|}\Big) + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}^{\circ}}\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T} + e^{-nj\angle{x}^{\circ}}\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}^{T}\Big(\vec{c} \odot \vec{|x|}\Big)\Bigg) \\ \\
-                          &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\Big(\vec{c} \odot \vec{|x|}\Big) + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}^{\circ}}\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T} + e^{-nj\angle{x}^{\circ}}\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T}\Bigg) \\ \\
-                          &= \Big|\vec{c} \odot \vec{|x|}\Big|^{2} + \sum_{n=1}^{N - 1}\Big(e^{nj\angle{x}^{\circ}} + e^{-nj\angle{x}^{\circ}}\Big)\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T} \\ \\
-                          &= \Big|\vec{c} \odot \vec{|x|}\Big|^{2} + 2\sum_{n=1}^{N - 1}\cos\big(n\angle{x}^{\circ}\big)\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T} \\ \\
-                          &= \Big|\vec{c} \odot \vec{|x|}\Big|^{2} + 2\sum_{n=1}^{N - 1}\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T}T_{n}\Big(\cos\big(\angle{x}^{\circ}\big)\Big)
+                          &= \vec{m}^{T}\vec{e^{j\angle{x}^{\circ}}}\vec{e^{-j\angle{x}^{\circ}}}^{T}\vec{m} \\ \\
+                          &= \vec{m}^{T}\Bigg(I_{N} + \sum_{n=1}^{N - 1}\Big(e^{nj\angle{x}^{\circ}}U_{N, n} + e^{-nj\angle{x}^{\circ}}U_{N, n}^{T}\Big)\Bigg)\vec{m} \quad , \quad U_{N, n} \equiv \begin{bmatrix}
+                                                                                                                                                                                                        0_{N - n, n} & I_{N - n} \\ \\
+                                                                                                                                                                                                        0_{n} & 0_{n, N - n}
+                                                                                                                                                                                                      \end{bmatrix} \\ \\
+                          &= \vec{m}^{T}I_{N}\vec{m} + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}^{\circ}}\vec{m}^{T}U_{N, n}\vec{m} + e^{-nj\angle{x}^{\circ}}\vec{m}^{T}U_{N, n}^{T}\vec{m}\Bigg) \\ \\
+                          &= \vec{m}^{T}\vec{m} + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}^{\circ}}\vec{m}^{T}U_{N, n}\vec{m} + e^{-nj\angle{x}^{\circ}}\vec{m}^{T}U_{N, n}\vec{m}\Bigg) \\ \\
+                          &= \big|\vec{m}\big|^{2} + \sum_{n=1}^{N - 1}\Big(e^{nj\angle{x}^{\circ}} + e^{-nj\angle{x}^{\circ}}\Big)\Big(\vec{m}^{T}U_{N, n}\vec{m}\Big) \\ \\
+                          &= \big|\vec{m}\big|^{2} + \sum_{n=1}^{N - 1}2\cos\big(n\angle{x}^{\circ}\big)M_{N, n} \quad , \quad M_{N, n} = \vec{m}^{T}U_{N, n}\vec{m} \\ \\
+                          &= \big|\vec{m}\big|^{2} + 2\sum_{n=1}^{N - 1}M_{N, n}T_{n}\Big(\cos\big(\angle{x}^{\circ}\big)\Big)
 \end{align*}
 
 \end{document}
