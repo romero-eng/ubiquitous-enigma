@@ -6,9 +6,28 @@
 \begin{document}
 
 \begin{align*}
-    f_{N}(x)&= \sum^{N - 1}_{n = 0}c_{n}x^{n}, \quad x \in \mathbb{C} \\ \\
+    f_{N}(x)&= \sum^{N - 1}_{n = 0}c_{n}x^{n} \quad , \quad x \in \mathbb{C} \quad , \quad c_n \in \mathbb{R}, \quad , \quad n = 0, ..., N - 1 \\ \\
             &= \sum^{N - 1}_{n = 0}c_{n}|x|^{n}e^{jn\angle{x}^{\circ}} \\ \\
-            &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{bmatrix}
+            &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\vec{e^{j\angle{x}^{\circ}}} \quad , \quad
+                                     \vec{c} \equiv \begin{bmatrix}
+                                                        c_{N - 1} \\
+                                                        c_{N - 2} \\
+                                                        c_{N - 3} \\
+                                                        \vdots \\
+                                                        c_{2} \\
+                                                        c_{1} \\
+                                                        c_{0}
+                                                      \end{bmatrix} \quad , \quad
+                                   \vec{|x|} \equiv \begin{bmatrix}
+                                                        |x|^{N - 1} \\
+                                                        |x|^{N - 2} \\
+                                                        |x|^{N - 3} \\
+                                                        \vdots \\
+                                                        |x|^{2} \\
+                                                        |x| \\
+                                                        1
+                                                      \end{bmatrix} \quad , \quad
+                \vec{e^{j\angle{x}^{\circ}}} \equiv \begin{bmatrix}
                                                         e^{j(N - 1)\angle{x}^{\circ}} \\
                                                         e^{j(N - 2)\angle{x}^{\circ}} \\
                                                         e^{j(N - 3)\angle{x}^{\circ}} \\
@@ -16,69 +35,21 @@
                                                         e^{j2\angle{x}^{\circ}} \\
                                                         e^{j\angle{x}^{\circ}} \\
                                                         1
-                                                      \end{bmatrix} \quad , \quad \vec{c} \equiv \begin{bmatrix}
-                                                                                                    c_{N - 1} \\
-                                                                                                    c_{N - 2} \\
-                                                                                                    c_{N - 3} \\
-                                                                                                    \vdots \\
-                                                                                                    c_{2} \\
-                                                                                                    c_{1} \\
-                                                                                                    c_{0}
-                                                                                                  \end{bmatrix} \quad , \quad \vec{|x|} = \begin{bmatrix}
-                                                                                                                                                |x|^{N - 1} \\
-                                                                                                                                                |x|^{N - 2} \\
-                                                                                                                                                |x|^{N - 3} \\
-                                                                                                                                                \vdots \\
-                                                                                                                                                |x|^{2} \\
-                                                                                                                                                |x| \\
-                                                                                                                                                1
-                                                                                                                                            \end{bmatrix} \\
+                                                      \end{bmatrix}
 \end{align*}
 
 \begin{align*}
     \Big|f_{N}(x)\Big|^{2}&= f_{N}(x)f^{*}_{N}(x) \\ \\
-                          &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{bmatrix}
-                                                                        e^{j(N - 1)\angle{x}^{\circ}} \\
-                                                                        e^{j(N - 2)\angle{x}^{\circ}} \\
-                                                                        e^{j(N - 3)\angle{x}^{\circ}} \\
-                                                                        \vdots \\
-                                                                        e^{j2\angle{x}^{\circ}} \\
-                                                                        e^{j\angle{x}^{\circ}} \\
-                                                                        1
-                                                                    \end{bmatrix}
-                                                                  \begin{bmatrix}
-                                                                        e^{-j(N - 1)\angle{x}^{\circ}} \\
-                                                                        e^{-j(N - 2)\angle{x}^{\circ}} \\
-                                                                        e^{-j(N - 3)\angle{x}^{\circ}} \\
-                                                                        \vdots \\
-                                                                        e^{-j2\angle{x}^{\circ}} \\
-                                                                        e^{-j\angle{x}^{\circ}} \\
-                                                                        1
-                                                                    \end{bmatrix}^{T}\Big(\vec{c} \odot \vec{|x|}\Big)
-\end{align*}
-
-\begin{align*}
-    &\begin{bmatrix}
-         e^{j(N - 1)\angle{x}^{\circ}} \\
-         e^{j(N - 2)\angle{x}^{\circ}} \\
-         e^{j(N - 3)\angle{x}^{\circ}} \\
-         \vdots \\
-         e^{j2\angle{x}^{\circ}} \\
-         e^{j\angle{x}^{\circ}} \\
-         1
-       \end{bmatrix}
-     \begin{bmatrix}
-         e^{-j(N - 1)\angle{x}^{\circ}} \\
-         e^{-j(N - 2)\angle{x}^{\circ}} \\
-         e^{-j(N - 3)\angle{x}^{\circ}} \\
-         \vdots \\
-         e^{-j2\angle{x}^{\circ}} \\
-         e^{-j\angle{x}^{\circ}} \\
-         1
-       \end{bmatrix}^{T} = I_{N} + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}^{\circ}}U_{N, n} + e^{-nj\angle{x}^{\circ}}U_{N, n}^{T}\Bigg) \quad , \quad U_{N, n} \equiv \begin{bmatrix}
-                                                                                                                                                                            0_{N - n, n} & I_{N - n} \\ \\
-                                                                                                                                                                            0_{n} & 0_{n, N - n}
-                                                                                                                                                                        \end{bmatrix}
+                          &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\vec{e^{j\angle{x}^{\circ}}}\vec{e^{-j\angle{x}^{\circ}}}^{T}\Big(\vec{c} \odot \vec{|x|}\Big) \\ \\
+                          &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\Bigg(I_{N} + \sum_{n=1}^{N - 1}\Big(e^{nj\angle{x}^{\circ}}U_{N, n} + e^{-nj\angle{x}^{\circ}}U_{N, n}^{T}\Big)\Bigg)\Big(\vec{c} \odot \vec{|x|}\Big) \quad , \quad U_{N, n} \equiv \begin{bmatrix}
+                                                                                                                                                                                                                                                            0_{N - n, n} & I_{N - n} \\ \\
+                                                                                                                                                                                                                                                            0_{n} & 0_{n, N - n}
+                                                                                                                                                                                                                                                          \end{bmatrix} \\ \\
+                          &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}I_{N}\Big(\vec{c} \odot \vec{|x|}\Big) + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}^{\circ}}\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T} + e^{-nj\angle{x}^{\circ}}\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}^{T}\Big(\vec{c} \odot \vec{|x|}\Big)\Bigg) \\ \\
+                          &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\Big(\vec{c} \odot \vec{|x|}\Big) + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}^{\circ}}\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T} + e^{-nj\angle{x}^{\circ}}\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T}\Bigg) \\ \\
+                          &= \Big|\vec{c} \odot \vec{|x|}\Big|^{2} + \sum_{n=1}^{N - 1}\Big(e^{nj\angle{x}^{\circ}} + e^{-nj\angle{x}^{\circ}}\Big)\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T} \\ \\
+                          &= \Big|\vec{c} \odot \vec{|x|}\Big|^{2} + 2\sum_{n=1}^{N - 1}\cos\big(n\angle{x}^{\circ}\big)\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T} \\ \\
+                          &= \Big|\vec{c} \odot \vec{|x|}\Big|^{2} + 2\sum_{n=1}^{N - 1}\Big(\vec{c} \odot \vec{|x|}\Big)U_{N, n}\Big(\vec{c} \odot \vec{|x|}\Big)^{T}T_{n}\Big(\cos\big(\angle{x}^{\circ}\big)\Big)
 \end{align*}
 
 \end{document}
