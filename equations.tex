@@ -162,7 +162,39 @@
                                                                         e^{-j2\angle{x}^{\circ}} \\
                                                                         e^{-j\angle{x}^{\circ}} \\
                                                                         1
-                                                                    \end{bmatrix}^{T}\Big(\vec{c} \odot \vec{|x|}\Big)   
+                                                                    \end{bmatrix}^{T}\Big(\vec{c} \odot \vec{|x|}\Big) \\ \\
+                           &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{pmatrix}I_{N} +
+                                                                         \begin{bmatrix}
+                                                                            \vec{0} & \big[e^{j\angle{x}^{\circ}}\big] \\ \\
+                                                                            0 & \vec{0}^{T}
+                                                                           \end{bmatrix} +
+                                                                         \begin{bmatrix}
+                                                                            \vec{0} & \big[e^{-j\angle{x}^{\circ}}\big] \\ \\
+                                                                            0 & \vec{0}^{T}
+                                                                          \end{bmatrix}^{T}\end{pmatrix}\Big(\vec{c} \odot \vec{|x|}\Big) \\ \\
+                           &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}I_{N}\Big(\vec{c} \odot \vec{|x|}\Big) +
+                              \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{bmatrix}
+                                                                        \vec{0} & \big[e^{j\angle{x}^{\circ}}\big] \\ \\
+                                                                        0 & \vec{0}^{T}
+                                                                     \end{bmatrix}\Big(\vec{c} \odot \vec{|x|}\Big) +
+                              \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{bmatrix}
+                                                                        \vec{0} & \big[e^{-j\angle{x}^{\circ}}\big] \\ \\
+                                                                        0 & \vec{0}^{T}
+                                                                     \end{bmatrix}^{T}\Big(\vec{c} \odot \vec{|x|}\Big) \\ \\
+                           &= \Big|\vec{c} \odot \vec{|x|}\Big|^{2} +
+                              \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{bmatrix}
+                                                                        \vec{0} & \big[e^{j\angle{x}^{\circ}}\big] \\ \\
+                                                                        0 & \vec{0}^{T}
+                                                                     \end{bmatrix}\Big(\vec{c} \odot \vec{|x|}\Big) +
+                              \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{bmatrix}
+                                                                        \vec{0} & \big[e^{-j\angle{x}^{\circ}}\big] \\ \\
+                                                                        0 & \vec{0}^{T}
+                                                                     \end{bmatrix}\Big(\vec{c} \odot \vec{|x|}\Big) \\ \\
+                           &= \Big|\vec{c} \odot \vec{|x|}\Big|^{2} +
+                              \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{bmatrix}
+                                                                        \vec{0} & \big[e^{j\angle{x}^{\circ}}\big] + \big[e^{-j\angle{x}^{\circ}}\big]^{T} \\ \\
+                                                                        0 & \vec{0}^{T}
+                                                                     \end{bmatrix}\Big(\vec{c} \odot \vec{|x|}\Big)
 \end{align*}
 
 \end{document}
