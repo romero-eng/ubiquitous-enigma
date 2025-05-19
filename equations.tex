@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[margin=1.5cm]{geometry}  
+\begin{document}
+
+\begin{align*}
+    f_{N}(x)&= \sum^{N - 1}_{n = 0}c_{n}x^{n}, \quad x \in \mathbb{C} \\ \\
+            &= \sum^{N - 1}_{n = 0}c_{n}\Big(|x|e^{j\angle{x}^{\circ}}\Big)^{n} \\ \\
+            &= \sum^{N - 1}_{n = 0}c_{n}|x|^{n}e^{jn\angle{x}^{\circ}} \\ \\
+            &= \begin{bmatrix}
+                    c_{N - 1}|x|^{N - 1} \\
+                    c_{N - 2}|x|^{N - 2} \\
+                    c_{N - 3}|x|^{N - 3} \\
+                    \vdots \\
+                    c_{2}|x|^{2} \\
+                    c_{1}|x| \\
+                    c_{0}
+                 \end{bmatrix}^{T}
+               \begin{bmatrix}
+                    e^{j(N - 1)\angle{x}^{\circ}} \\
+                    e^{j(N - 2)\angle{x}^{\circ}} \\
+                    e^{j(N - 3)\angle{x}^{\circ}} \\
+                    \vdots \\
+                    e^{j2\angle{x}^{\circ}} \\
+                    e^{j\angle{x}^{\circ}} \\
+                    1
+                 \end{bmatrix} \\ \\
+            &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{bmatrix}
+                                                        e^{j(N - 1)\angle{x}^{\circ}} \\
+                                                        e^{j(N - 2)\angle{x}^{\circ}} \\
+                                                        e^{j(N - 3)\angle{x}^{\circ}} \\
+                                                        \vdots \\
+                                                        e^{j2\angle{x}^{\circ}} \\
+                                                        e^{j\angle{x}^{\circ}} \\
+                                                        1
+                                                      \end{bmatrix} \quad , \quad \vec{c} \equiv \begin{bmatrix}
+                                                                                                    c_{N - 1} \\
+                                                                                                    c_{N - 2} \\
+                                                                                                    c_{N - 3} \\
+                                                                                                    \vdots \\
+                                                                                                    c_{2} \\
+                                                                                                    c_{1} \\
+                                                                                                    c_{0}
+                                                                                                  \end{bmatrix} \quad , \quad \vec{|x|} = \begin{bmatrix}
+                                                                                                                                                |x|^{N - 1} \\
+                                                                                                                                                |x|^{N - 2} \\
+                                                                                                                                                |x|^{N - 3} \\
+                                                                                                                                                \vdots \\
+                                                                                                                                                |x|^{2} \\
+                                                                                                                                                |x| \\
+                                                                                                                                                1
+                                                                                                                                            \end{bmatrix} \\
+\end{align*}
+
+\begin{align*}
+    f^{*}_{N}(x) = \begin{bmatrix}
+                     e^{-j(N - 1)\angle{x}^{\circ}} \\
+                     e^{-j(N - 2)\angle{x}^{\circ}} \\
+                     e^{-j(N - 3)\angle{x}^{\circ}} \\
+                     \vdots \\
+                     e^{-j2\angle{x}^{\circ}} \\
+                     e^{-j\angle{x}^{\circ}} \\
+                     1
+                     \end{bmatrix}^{T}\Big(\vec{c} \odot \vec{|x|}\Big)
+\end{align*}
+
+\begin{align*}
+    \Big|f_{N}(x)\Big|^{2}&= f_{N}(x)f^{*}_{N}(x) \\ \\
+                          &= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{bmatrix}
+                                                                        e^{j(N - 1)\angle{x}^{\circ}} \\
+                                                                        e^{j(N - 2)\angle{x}^{\circ}} \\
+                                                                        e^{j(N - 3)\angle{x}^{\circ}} \\
+                                                                        \vdots \\
+                                                                        e^{j2\angle{x}^{\circ}} \\
+                                                                        e^{j\angle{x}^{\circ}} \\
+                                                                        1
+                                                                    \end{bmatrix}
+                                                                  \begin{bmatrix}
+                                                                        e^{-j(N - 1)\angle{x}^{\circ}} \\
+                                                                        e^{-j(N - 2)\angle{x}^{\circ}} \\
+                                                                        e^{-j(N - 3)\angle{x}^{\circ}} \\
+                                                                        \vdots \\
+                                                                        e^{-j2\angle{x}^{\circ}} \\
+                                                                        e^{-j\angle{x}^{\circ}} \\
+                                                                        1
+                                                                    \end{bmatrix}^{T}\Big(\vec{c} \odot \vec{|x|}\Big)
+\end{align*}
+
+\begin{align*}
+    &\begin{bmatrix}
+         e^{j(N - 1)\angle{x}^{\circ}} \\
+         e^{j(N - 2)\angle{x}^{\circ}} \\
+         e^{j(N - 3)\angle{x}^{\circ}} \\
+         \vdots \\
+         e^{j2\angle{x}^{\circ}} \\
+         e^{j\angle{x}^{\circ}} \\
+         1
+       \end{bmatrix}
+     \begin{bmatrix}
+         e^{-j(N - 1)\angle{x}^{\circ}} \\
+         e^{-j(N - 2)\angle{x}^{\circ}} \\
+         e^{-j(N - 3)\angle{x}^{\circ}} \\
+         \vdots \\
+         e^{-j2\angle{x}^{\circ}} \\
+         e^{-j\angle{x}^{\circ}} \\
+         1
+       \end{bmatrix}^{T} = \hdots \\ \\
+    & \ldots = \begin{bmatrix}
+                    1 & e^{j\angle{x}^{\circ}} & e^{2j\angle{x}^{\circ}} & \ldots & e^{j(N - 3)\angle{x}^{\circ}} & e^{j(N - 2)\angle{x}^{\circ}} & e^{j(N - 1)\angle{x}^{\circ}} \\ \\
+                    e^{-j\angle{x}^{\circ}} & 1 & e^{j\angle{x}^{\circ}} & \ldots & e^{j(N - 4)\angle{x}^{\circ}} & e^{j(N - 3)\angle{x}^{\circ}} & e^{j(N - 2)\angle{x}^{\circ}} \\ \\
+                    e^{-2j\angle{x}^{\circ}} & e^{-j\angle{x}^{\circ}} & 1 & \ldots & e^{j(N - 5)\angle{x}^{\circ}} & e^{j(N - 4)\angle{x}^{\circ}} & e^{j(N - 3)\angle{x}^{\circ}} \\ \\
+                    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\ \\
+                    e^{-j(N - 3)\angle{x}^{\circ}} & e^{-j(N - 4)\angle{x}^{\circ}} & e^{-j(N - 5)\angle{x}^{\circ}} & \ldots & 1 & e^{j\angle{x}^{\circ}} & e^{2j\angle{x}^{\circ}} \\ \\
+                    e^{-j(N - 2)\angle{x}^{\circ}} & e^{-j(N - 3)\angle{x}^{\circ}} & e^{-j(N - 4)\angle{x}^{\circ}} & \ldots & e^{-j\angle{x}^{\circ}} & 1 & e^{j\angle{x}^{\circ}} \\ \\
+                    e^{-j(N - 1)\angle{x}^{\circ}} & e^{-j(N - 2)\angle{x}^{\circ}} & e^{-j(N - 3)\angle{x}^{\circ}} & \ldots & e^{-2j\angle{x}^{\circ}} & e^{-j\angle{x}^{\circ}} & 1 \\ \\ 
+                 \end{bmatrix} \\ \\
+    & \ldots = I_{N} +
+               \begin{bmatrix}
+                    0 & e^{j\angle{x}^{\circ}} & e^{2j\angle{x}^{\circ}} & \ldots & e^{j(N - 3)\angle{x}^{\circ}} & e^{j(N - 2)\angle{x}^{\circ}} & e^{j(N - 1)\angle{x}^{\circ}} \\ \\
+                    e^{-j\angle{x}^{\circ}} & 0 & e^{j\angle{x}^{\circ}} & \ldots & e^{j(N - 4)\angle{x}^{\circ}} & e^{j(N - 3)\angle{x}^{\circ}} & e^{j(N - 2)\angle{x}^{\circ}} \\ \\
+                    e^{-2j\angle{x}^{\circ}} & e^{-j\angle{x}^{\circ}} & 0 & \ldots & e^{j(N - 5)\angle{x}^{\circ}} & e^{j(N - 4)\angle{x}^{\circ}} & e^{j(N - 3)\angle{x}^{\circ}} \\ \\
+                    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\ \\
+                    e^{-j(N - 3)\angle{x}^{\circ}} & e^{-j(N - 4)\angle{x}^{\circ}} & e^{-j(N - 5)\angle{x}^{\circ}} & \ldots & 0 & e^{j\angle{x}^{\circ}} & e^{2j\angle{x}^{\circ}} \\ \\
+                    e^{-j(N - 2)\angle{x}^{\circ}} & e^{-j(N - 3)\angle{x}^{\circ}} & e^{-j(N - 4)\angle{x}^{\circ}} & \ldots & e^{-j\angle{x}^{\circ}} & 0 & e^{j\angle{x}^{\circ}} \\ \\
+                    e^{-j(N - 1)\angle{x}^{\circ}} & e^{-j(N - 2)\angle{x}^{\circ}} & e^{-j(N - 3)\angle{x}^{\circ}} & \ldots & e^{-2j\angle{x}^{\circ}} & e^{-j\angle{x}^{\circ}} & 0 \\ \\ 
+                 \end{bmatrix} \\ \\
+    & \ldots = I_{N} +
+               \begin{bmatrix}
+                    \vec{0} & \big[e^{j\angle{x}^{\circ}}\big] \\ \\
+                    0 & \vec{0}^{T}
+                 \end{bmatrix} +
+               \begin{bmatrix}
+                    \vec{0} & \big[e^{-j\angle{x}^{\circ}}\big] \\ \\
+                    0 & \vec{0}^{T}
+                 \end{bmatrix}^{T} \quad , \quad \big[e^{\pm j\angle{x}^{\circ}}\big] \equiv \begin{bmatrix}
+                                                                                                e^{\pm j\angle{x}^{\circ}} & e^{\pm 2j\angle{x}^{\circ}} & \ldots & e^{\pm j(N - 3)\angle{x}^{\circ}} & e^{\pm j(N - 2)\angle{x}^{\circ}} & e^{\pm j(N - 1)\angle{x}^{\circ}} \\ \\
+                                                                                                0 & e^{\pm j\angle{x}^{\circ}} & \ldots & e^{\pm j(N - 4)\angle{x}^{\circ}} & e^{\pm j(N - 3)\angle{x}^{\circ}} & e^{\pm j(N - 2)\angle{x}^{\circ}} \\ \\
+                                                                                                0 & 0 & \ldots & e^{\pm j(N - 5)\angle{x}^{\circ}} & e^{\pm j(N - 4)\angle{x}^{\circ}} & e^{\pm j(N - 3)\angle{x}^{\circ}} \\ \\
+                                                                                                \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\ \\
+                                                                                                0 & 0 & \ldots & 0 & e^{\pm j\angle{x}^{\circ}} & e^{\pm 2j\angle{x}^{\circ}} \\ \\
+                                                                                                0 & 0 & \ldots & 0 & 0 & e^{\pm j\angle{x}^{\circ}}
+                                                                                               \end{bmatrix} 
+\end{align*}
+
+\begin{align*}
+     \Big|f_{N}(x)\Big|^{2}&= \Big(\vec{c} \odot \vec{|x|}\Big)^{T}\begin{bmatrix}
+                                                                        e^{j(N - 1)\angle{x}^{\circ}} \\
+                                                                        e^{j(N - 2)\angle{x}^{\circ}} \\
+                                                                        e^{j(N - 3)\angle{x}^{\circ}} \\
+                                                                        \vdots \\
+                                                                        e^{j2\angle{x}^{\circ}} \\
+                                                                        e^{j\angle{x}^{\circ}} \\
+                                                                        1
+                                                                    \end{bmatrix}
+                                                                  \begin{bmatrix}
+                                                                        e^{-j(N - 1)\angle{x}^{\circ}} \\
+                                                                        e^{-j(N - 2)\angle{x}^{\circ}} \\
+                                                                        e^{-j(N - 3)\angle{x}^{\circ}} \\
+                                                                        \vdots \\
+                                                                        e^{-j2\angle{x}^{\circ}} \\
+                                                                        e^{-j\angle{x}^{\circ}} \\
+                                                                        1
+                                                                    \end{bmatrix}^{T}\Big(\vec{c} \odot \vec{|x|}\Big)   
+\end{align*}
+
+\end{document}
