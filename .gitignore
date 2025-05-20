@@ -1,0 +1,6 @@
+# Latex Files
+*.swp
+*.aux
+*.log
+*.pdf
+view/
