@@ -43,8 +43,8 @@
     \Big|f_{N}(x)\Big|^{2}&= f_{N}(x)f^{*}_{N}(x) \\ \\
                           &= \vec{m}^{T}\vec{e^{j\angle{x}^{\circ}}}\vec{e^{-j\angle{x}^{\circ}}}^{T}\vec{m} \\ \\
                           &= \vec{m}^{T}\Bigg(I_{N} + \sum_{n=1}^{N - 1}\Big(e^{nj\angle{x}^{\circ}}U_{N, n} + e^{-nj\angle{x}^{\circ}}U_{N, n}^{T}\Big)\Bigg)\vec{m} \quad , \quad U_{N, n} \equiv \begin{bmatrix}
-                                                                                                                                                                                                        0_{N - n, n} & I_{N - n} \\ \\
-                                                                                                                                                                                                        0_{n} & 0_{n, N - n}
+                                                                                                                                                                                                        0_{n, N - n} & I_{n} \\ \\
+                                                                                                                                                                                                        0_{N - n} & 0_{N - n, n}
                                                                                                                                                                                                       \end{bmatrix} \\ \\
                           &= \vec{m}^{T}I_{N}\vec{m} + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}^{\circ}}\vec{m}^{T}U_{N, n}\vec{m} + e^{-nj\angle{x}^{\circ}}\vec{m}^{T}U_{N, n}^{T}\vec{m}\Bigg) \\ \\
                           &= \vec{m}^{T}\vec{m} + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}^{\circ}}\vec{m}^{T}U_{N, n}\vec{m} + e^{-nj\angle{x}^{\circ}}\vec{m}^{T}U_{N, n}\vec{m}\Bigg) \\ \\
