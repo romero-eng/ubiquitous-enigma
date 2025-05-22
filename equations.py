@@ -11,8 +11,8 @@ from numpy.polynomial.chebyshev import chebval
 import os
 import subprocess
 import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # Added a flake8 supression to deal with matplotlib's usage of non-interative backend  # noqa: E402, E501
+matplotlib.use("Agg")  # flake8 supression to deal with matplotlib's usage of non-interative backend
+import matplotlib.pyplot as plt  # noqa: E402
 
 
 if (__name__ == "__main__"):
@@ -20,10 +20,12 @@ if (__name__ == "__main__"):
     U_: Callable[[int, int], npt.NDArray[np.float64]] = \
         lambda N, n: np.concatenate((np.concatenate((np.zeros((N - n, n)), np.identity(N - n)),   axis=1),
                                      np.concatenate((np.zeros((    n, n)), np.zeros((n, N - n))), axis=1)),  # noqa: E201, E501
-                                    axis=0)
+                                    axis=0) 
+
+    C_: Callable[[list[float], int], np.float64] = lambda c, n: np.dot(c, np.matmul(U_(len(c), n), c))
 
     mag_: Callable[[list[float], npt.NDArray[np.float64]], npt.NDArray[np.float64]] = \
-        lambda c, w: np.sqrt(np.dot(c, c) + 2*chebval(np.cos(w), [np.dot(c, np.matmul(U_(len(c), n), c)) if n > 0 else 0 for n in range(len(c))]))  # noqa: E501
+        lambda c, w: np.sqrt(np.dot(c, c) + 2*chebval(np.cos(w), [C_(c, n) if n > 0 else 0 for n in range(len(c))]))
 
     b = [2.1, -4, 5, 3]
     [w, h] = dsp.freqz(b)
