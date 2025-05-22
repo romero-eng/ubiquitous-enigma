@@ -51,8 +51,8 @@
                           &= \vec{m}^{T}I_{N}\vec{m} + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}}\vec{m}^{T}U_{N, n}\vec{m} + e^{-nj\angle{x}}\vec{m}^{T}U_{N, n}^{T}\vec{m}\Bigg) \\ \\
                           &= \vec{m}^{T}\vec{m} + \sum_{n=1}^{N - 1}\Bigg(e^{nj\angle{x}}\vec{m}^{T}U_{N, n}\vec{m} + e^{-nj\angle{x}}\vec{m}^{T}U_{N, n}\vec{m}\Bigg) \\ \\
                           &= \big|\vec{m}\big|^{2} + \sum_{n=1}^{N - 1}\Big(e^{nj\angle{x}} + e^{-nj\angle{x}}\Big)\Big(\vec{m}^{T}U_{N, n}\vec{m}\Big) \\ \\
-                          &= \big|\vec{m}\big|^{2} + \sum_{n=1}^{N - 1}2\cos\big(n\angle{x}\big)M_{N, n} \quad , \quad M_{N, n} = \vec{m}^{T}U_{N, n}\vec{m} \\ \\
-                          &= \big|\vec{m}\big|^{2} + 2\sum_{n=1}^{N - 1}M_{N, n}T_{n}\Big(\cos\big(\angle{x}\big)\Big)
+                          &= \big|\vec{m}\big|^{2} + \sum_{n=1}^{N - 1}2\cos\big(n\angle{x}\big)R_{mm}\big(n\big) \\ \\
+                          &= \big|\vec{m}\big|^{2} + 2\sum_{n=1}^{N - 1}R_{mm}\big(n\big)T_{n}\Big(\cos\big(\angle{x}\big)\Big)
 \end{align*}
 
 \textbf{\underline{Application towards Frequency Analysis}}
@@ -80,13 +80,13 @@
                                     1
                                 \end{bmatrix} = \vec{1} \\ \\
     & \Rightarrow \vec{m} = \vec{c} \odot \vec{|x|} = \vec{c} \odot \vec{1} = \vec{c} \\ \\
-    & \Rightarrow M_{N, n} = \vec{m}^{T}U_{N, n}\vec{m} = \vec{c}^{T}U_{N, n}\vec{c} = C_{N, n} 
+    & \Rightarrow R_{mm}\big(n\big) = R_{cc}\big(n\big)
 \end{align*}
 
 \begin{align*}
     & \\ \\
     & f(z) = \sum_{n = 0}^{N - 1}c_{n}z^{-n} \\ \\
-    &\Rightarrow |f(\omega)|^{2} = \big|\vec{c}\big|^{2} + 2\sum_{n=1}^{N - 1}C_{N, n}T_{n}\Big(\cos\big(\omega\big)\Big) 
+    &\Rightarrow |f(\omega)|^{2} = \big|\vec{c}\big|^{2} + 2\sum_{n=1}^{N - 1}R_{cc}\big(n\big)T_{n}\Big(\cos\big(\omega\big)\Big) 
 \end{align*}
 
 \end{document}

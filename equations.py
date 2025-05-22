@@ -17,15 +17,8 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 if (__name__ == "__main__"):
 
-    U_: Callable[[int, int], npt.NDArray[np.float64]] = \
-        lambda N, n: np.concatenate((np.concatenate((np.zeros((N - n, n)), np.identity(N - n)),   axis=1),
-                                     np.concatenate((np.zeros((    n, n)), np.zeros((n, N - n))), axis=1)),  # noqa: E201, E501
-                                    axis=0) 
-
-    C_: Callable[[list[float], int], np.float64] = lambda c, n: np.dot(c, np.matmul(U_(len(c), n), c))
-
     mag_: Callable[[list[float], npt.NDArray[np.float64]], npt.NDArray[np.float64]] = \
-        lambda c, w: np.sqrt(np.dot(c, c) + 2*chebval(np.cos(w), [C_(c, n) if n > 0 else 0 for n in range(len(c))]))
+        lambda c, w: np.sqrt(np.dot(c, c) + 2*chebval(np.cos(w), np.insert(np.correlate(c, c, "full")[len(c):], 0, 0)))
 
     b = [2.1, -4, 5, 3]
     [w, h] = dsp.freqz(b)
@@ -33,7 +26,7 @@ if (__name__ == "__main__"):
 
     sq_magnitudes: dict[str, npt.NDArray[np.float64]] = \
         {"Theoretical": mag_(b, w),
-              "Actual": np.abs(h)}                              # noqa: E127
+              "Actual": np.abs(h)}  # noqa: E127
 
     png_filename = "actual.png"
     [fig, axes] = plt.subplots(len(sq_magnitudes))
