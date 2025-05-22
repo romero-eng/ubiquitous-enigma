@@ -17,15 +17,14 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 if (__name__ == "__main__"):
 
-    mag_: Callable[[list[float], npt.NDArray[np.float64]], npt.NDArray[np.float64]] = \
-        lambda c, w: np.sqrt(np.dot(c, c) + 2*chebval(np.cos(w), np.insert(np.correlate(c, c, "full")[len(c):], 0, 0)))
-
     b = [2.1, -4, 5, 3]
     [w, h] = dsp.freqz(b)
     freq = w/(2*np.pi)
 
+    R_cc = np.correlate(b, b, "full")[len(b) - 1:]
+
     sq_magnitudes: dict[str, npt.NDArray[np.float64]] = \
-        {"Theoretical": mag_(b, w),
+        {"Theoretical": np.sqrt(R_cc[0] + 2*chebval(np.cos(w), np.insert(R_cc[1:], 0, 0))),
               "Actual": np.abs(h)}  # noqa: E127
 
     png_filename = "actual.png"
