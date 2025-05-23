@@ -5,7 +5,7 @@ from typing import Callable
 # Calculation Modules
 import numpy as np
 import scipy.signal as dsp
-from numpy.polynomial.chebyshev import chebval
+from numpy.polynomial.chebyshev import chebval, cheb2poly
 
 # Plotting Modules
 import os
@@ -21,10 +21,13 @@ if (__name__ == "__main__"):
     [w, h] = dsp.freqz(b)
     freq = w/(2*np.pi)
 
-    R_cc = np.correlate(b, b, "full")[len(b) - 1:]
+    N = len(b) - 1
+    R_cc = np.correlate(b, b, "full")[N:]
 
+    # The "simpler" code with Chebyshev series:
+    #   np.sqrt(R_cc[0] + 2*chebval(np.cos(w), np.insert(R_cc[1:], 0, 0)))
     sq_magnitudes: dict[str, npt.NDArray[np.float64]] = \
-        {"Theoretical": np.sqrt(R_cc[0] + 2*chebval(np.cos(w), np.insert(R_cc[1:], 0, 0))),
+        {"Theoretical": np.sqrt(R_cc[0] + 2*np.sum([coef*np.power(np.cos(w), n) for n, coef in enumerate(np.matmul(np.transpose(np.array([np.array(list(cheb2poly(n*[0] + [1])) + (N - n)*[0]) for n in range(N, 0, -1)])), R_cc[:0:-1]))], 0)),
               "Actual": np.abs(h)}  # noqa: E127
 
     png_filename = "actual.png"
@@ -32,7 +35,6 @@ if (__name__ == "__main__"):
     for ax, title in zip(axes, list(sq_magnitudes.keys())):
         ax.plot(freq, sq_magnitudes[title])
         ax.set_xlim([0, 0.5])
-        # ax.set_ylim(bottom=0)
         ax.grid()
         ax.set_title(title)
     fig.supxlabel("Digital Frequency (Hz)")

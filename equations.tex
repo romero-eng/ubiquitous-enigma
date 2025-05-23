@@ -29,21 +29,21 @@
                                                         |x| \\
                                                         1
                                                       \end{bmatrix} \quad , \quad
-                \vec{e^{j\angle{x}}} \equiv \begin{bmatrix}
-                                                e^{j(N - 1)\angle{x}^{\circ}} \\
-                                                e^{j(N - 2)\angle{x}^{\circ}} \\
-                                                e^{j(N - 3)\angle{x}^{\circ}} \\
-                                                \vdots \\
-                                                e^{j2\angle{x}^{\circ}} \\
-                                                e^{j\angle{x}^{\circ}} \\
-                                                1
-                                              \end{bmatrix} \quad , \quad \\ \\
-            &= \vec{m}^{T}\vec{e^{j\angle{x}}} \quad , \quad \vec{m} \equiv \vec{c} \odot \vec{|x|} 
+                \vec{q}\big(\angle{x}\big) \equiv \begin{bmatrix}
+                                                        e^{j(N - 1)\angle{x}^{\circ}} \\
+                                                        e^{j(N - 2)\angle{x}^{\circ}} \\
+                                                        e^{j(N - 3)\angle{x}^{\circ}} \\
+                                                        \vdots \\
+                                                        e^{j2\angle{x}^{\circ}} \\
+                                                        e^{j\angle{x}^{\circ}} \\
+                                                        1
+                                                    \end{bmatrix} \quad , \quad \\ \\
+            &= \vec{m}^{T}\vec{q}\big(\angle{x}\big) \quad , \quad \vec{m} \equiv \vec{c} \odot \vec{|x|} 
 \end{align*}
 
 \begin{align*}
     \Big|f_{N}(x)\Big|^{2}&= f_{N}(x)f^{*}_{N}(x) \\ \\
-                          &= \vec{m}^{T}\vec{e^{j\angle{x}}}\vec{e^{-j\angle{x}}}^{T}\vec{m} \\ \\
+                          &= \vec{m}^{T}\vec{q}\big(\angle{x}\big)\vec{q}^{T}\big(\angle{x}\big)\vec{m} \\ \\
                           &= \vec{m}^{T}\Bigg(I_{N} + \sum_{n=1}^{N - 1}\Big(e^{nj\angle{x}}U_{N, n} + e^{-nj\angle{x}}U_{N, n}^{T}\Big)\Bigg)\vec{m} \quad , \quad U_{N, n} \equiv \begin{bmatrix}
                                                                                                                                                                                         0_{N - n, n} & I_{N - n} \\ \\
                                                                                                                                                                                         0_{n} & 0_{n, N - n}
@@ -55,38 +55,145 @@
                           &= R_{mm}\big(0\big) + 2\sum_{n=1}^{N - 1}R_{mm}\big(n\big)T_{n}\Big(\cos\big(\angle{x}\big)\Big)
 \end{align*}
 
+\begin{align*}
+    &= R_{mm}\big(0\big) + 2\begin{bmatrix}
+                                R_{mm}\big(N - 1\big) \\
+                                R_{mm}\big(N - 2\big) \\
+                                R_{mm}\big(N - 3\big) \\
+                                \vdots \\
+                                R_{mm}\big(3\big) \\
+                                R_{mm}\big(2\big) \\
+                                R_{mm}\big(1\big)
+                              \end{bmatrix}^{T}
+                            \begin{bmatrix}
+                                T_{N - 1}\Big(\cos\big(\angle{x}\big)\Big) \\
+                                T_{N - 2}\Big(\cos\big(\angle{x}\big)\Big) \\
+                                T_{N - 3}\Big(\cos\big(\angle{x}\big)\Big) \\
+                                \vdots \\\
+                                T_{3}\Big(\cos\big(\angle{x}\big)\Big) \\
+                                T_{2}\Big(\cos\big(\angle{x}\big)\Big) \\
+                                T_{1}\Big(\cos\big(\angle{x}\big)\Big) \end{bmatrix} \\ \\
+    &= R_{mm}\big(0\big) + 2\begin{bmatrix}
+                                R_{mm}\big(N - 1\big) \\
+                                R_{mm}\big(N - 2\big) \\
+                                R_{mm}\big(N - 3\big) \\
+                                \vdots \\
+                                R_{mm}\big(3\big) \\
+                                R_{mm}\big(2\big) \\
+                                R_{mm}\big(1\big)
+                              \end{bmatrix}^{T}
+                            \begin{bmatrix}
+                                \sum_{k=0}^{N - 1}t_{N - 1, k}\cos^{k}\big(\angle{x}\big) \\ \\
+                                \sum_{k=0}^{N - 2}t_{N - 2, k}\cos^{k}\big(\angle{x}\big) \\ \\
+                                \sum_{k=0}^{N - 3}t_{N - 3, k}\cos^{k}\big(\angle{x}\big) \\ \\
+                                \vdots \\ \\
+                                \sum_{k=0}^{3}t_{3, k}\cos^{k}\big(\angle{x}\big) \\ \\
+                                \sum_{k=0}^{2}t_{2, k}\cos^{k}\big(\angle{x}\big) \\ \\
+                                \sum_{k=0}^{1}t_{1, k}\cos^{k}\big(\angle{x}\big) \\ \\
+                              \end{bmatrix} \\ \\
+    &= R_{mm}\big(0\big) + 2\begin{bmatrix}
+                                R_{mm}\big(N - 1\big) \\
+                                R_{mm}\big(N - 2\big) \\
+                                R_{mm}\big(N - 3\big) \\
+                                \vdots \\
+                                R_{mm}\big(3\big) \\
+                                R_{mm}\big(2\big) \\
+                                R_{mm}\big(1\big)
+                              \end{bmatrix}^{T}
+                            \begin{bmatrix}
+                                t_{N - 1, N - 1} & t_{N - 1, N - 2} & t_{N - 1, N - 3} & \ldots & t_{N - 1, 2} & t_{N - 1, 1} & t_{N - 1, 0} \\ \\
+                                               0 & t_{N - 2, N - 2} & t_{N - 2, N - 3} & \ldots & t_{N - 2, 2} & t_{N - 2, 1} & t_{N - 1, 0} \\ \\
+                                               0 &                0 & t_{N - 3, N - 3} & \ldots & t_{N - 3, 2} & t_{N - 3, 1} & t_{N - 1, 0} \\ \\
+                                          \vdots &           \vdots &           \vdots & \ddots &       \vdots &       \vdots &       \vdots \\ \\
+                                               0 &                0 &                0 & \ldots &     t_{3, 2} &     t_{3, 1} &     t_{3, 0} \\ \\
+                                               0 &                0 &                0 & \ldots &     t_{2, 2} &     t_{2, 1} &     t_{2, 0} \\ \\
+                                               0 &                0 &                0 & \ldots &            0 &     t_{1, 1} &     t_{1, 0} 
+                              \end{bmatrix}
+                            \begin{bmatrix}
+                                \cos^{N - 1}\big(\omega\big) \\
+                                \cos^{N - 2}\big(\omega\big) \\
+                                \cos^{N - 3}\big(\omega\big) \\
+                                \vdots \\
+                                \cos^{3}\big(\omega\big) \\
+                                \cos^{2}\big(\omega\big) \\
+                                \cos^{1}\big(\omega\big) \\
+                                1 
+                              \end{bmatrix} \\ \\
+    &= R_{mm}\big(0\big) + 2\begin{pmatrix}
+                                \begin{bmatrix}
+                                    t_{N - 1, N - 1} &                0 &                0 & \ldots &        0 &        0 &        0 \\ \\
+                                    t_{N - 1, N - 2} & t_{N - 2, N - 2} &                0 & \ldots &        0 &        0 &        0 \\ \\
+                                    t_{N - 1, N - 3} & t_{N - 2, N - 3} & t_{N - 3, N - 3} & \ldots &        0 &        0 &        0 \\ \\
+                                              \vdots &           \vdots &           \vdots & \ddots &   \vdots &   \vdots &   \vdots \\ \\
+                                    t_{N - 1,     2} & t_{N - 2,     2} & t_{N - 3,     2} & \ldots & t_{3, 2} & t_{2, 2} &        0 \\ \\
+                                    t_{N - 1,     1} & t_{N - 2,     1} & t_{N - 3,     1} & \ldots & t_{3, 1} & t_{2, 1} & t_{1, 1} \\ \\
+                                    t_{N - 1,     0} & t_{N - 1,     0} & t_{N - 1,     0} & \ldots & t_{3, 0} & t_{2, 0} & t_{1, 0} 
+                                  \end{bmatrix}
+                                \begin{bmatrix}
+                                    R_{mm}\big(N - 1\big) \\
+                                    R_{mm}\big(N - 2\big) \\
+                                    R_{mm}\big(N - 3\big) \\
+                                    \vdots \\
+                                    R_{mm}\big(3\big) \\
+                                    R_{mm}\big(2\big) \\
+                                    R_{mm}\big(1\big)
+                                  \end{bmatrix}
+                              \end{pmatrix}^{T}
+                            \begin{bmatrix}
+                                \cos^{N - 1}\big(\omega\big) \\
+                                \cos^{N - 2}\big(\omega\big) \\
+                                \cos^{N - 3}\big(\omega\big) \\
+                                \vdots \\
+                                \cos^{3}\big(\omega\big) \\
+                                \cos^{2}\big(\omega\big) \\
+                                \cos^{1}\big(\omega\big) \\
+                                1 
+                              \end{bmatrix}
+\end{align*}
+
 \textbf{\underline{Application towards Frequency Analysis}}
 
 \begin{align*}
     & \Rightarrow x = z^{-1} \quad \quad \quad \quad \quad \quad \quad \quad \text{Z-transform (Transformation of Complex Plane for Discrete-time analysis)} \\ \\
     & \Rightarrow x = \big(e^{j\omega}\big)^{-1} = e^{-j\omega} \quad \quad \quad \text{Discrete-Time Fourier Transform (Staying along unit circle)} \\ \\
     & \Rightarrow |x| = 1, \quad \angle{x} = \omega \\ \\
-    & \Rightarrow \vec{|x|} = \begin{bmatrix}
-                                    |x|^{N - 1} \\
-                                    |x|^{N - 2} \\
-                                    |x|^{N - 3} \\
-                                    \vdots \\
-                                    |x|^{2} \\
-                                    |x| \\
-                                    1
-                                \end{bmatrix}
-                            = \begin{bmatrix}
-                                    1 \\
-                                    1 \\
-                                    1 \\
-                                    \vdots
-                                    1 \\
-                                    1 \\
-                                    1
-                                \end{bmatrix} = \vec{1} \\ \\
-    & \Rightarrow \vec{m} = \vec{c} \odot \vec{|x|} = \vec{c} \odot \vec{1} = \vec{c} \\ \\
-    & \Rightarrow R_{mm}\big(n\big) = R_{cc}\big(n\big)
+    & \Rightarrow \vec{m} = \vec{c} \odot \vec{|x|} = \vec{c} \quad , \quad R_{mm}\big(n\big) = R_{cc}\big(n\big) \\ \\
 \end{align*}
 
 \begin{align*}
     & \\ \\
     & f(z) = \sum_{n = 0}^{N - 1}c_{n}z^{-n} \\ \\
-    &\Rightarrow |f(\omega)|^{2} = R_{cc}\big(0\big) + 2\sum_{n=1}^{N - 1}R_{cc}\big(n\big)T_{n}\Big(\cos\big(\omega\big)\Big) 
+    &\Rightarrow |f(\omega)|^{2} = R_{cc}\big(0\big) + 2\sum_{n=1}^{N - 1}R_{cc}\big(n\big)T_{n}\Big(\cos\big(\omega\big)\Big) \\ \\ 
+    &\Rightarrow |f(\omega)|^{2} = R_{cc}\big(0\big) + 2\begin{pmatrix}
+                                                            \begin{bmatrix}
+                                                                t_{N - 1, N - 1} &                0 &                0 & \ldots &        0 &        0 &        0 \\ \\
+                                                                t_{N - 1, N - 2} & t_{N - 2, N - 2} &                0 & \ldots &        0 &        0 &        0 \\ \\
+                                                                t_{N - 1, N - 3} & t_{N - 2, N - 3} & t_{N - 3, N - 3} & \ldots &        0 &        0 &        0 \\ \\
+                                                                \vdots &           \vdots &           \vdots & \ddots &   \vdots &   \vdots &   \vdots \\ \\
+                                                                t_{N - 1,     2} & t_{N - 2,     2} & t_{N - 3,     2} & \ldots & t_{3, 2} & t_{2, 2} &        0 \\ \\
+                                                                t_{N - 1,     1} & t_{N - 2,     1} & t_{N - 3,     1} & \ldots & t_{3, 1} & t_{2, 1} & t_{1, 1} \\ \\
+                                                                t_{N - 1,     0} & t_{N - 1,     0} & t_{N - 1,     0} & \ldots & t_{3, 0} & t_{2, 0} & t_{1, 0} 
+                                                              \end{bmatrix}
+                                                            \begin{bmatrix}
+                                                                R_{cc}\big(N - 1\big) \\
+                                                                R_{cc}\big(N - 2\big) \\
+                                                                R_{cc}\big(N - 3\big) \\
+                                                                \vdots \\
+                                                                R_{cc}\big(3\big) \\
+                                                                R_{cc}\big(2\big) \\
+                                                                R_{cc}\big(1\big)
+                                                              \end{bmatrix}
+                                                              \end{pmatrix}^{T}
+                                                        \begin{bmatrix}
+                                                            \cos^{N - 1}\big(\omega\big) \\
+                                                            \cos^{N - 2}\big(\omega\big) \\
+                                                            \cos^{N - 3}\big(\omega\big) \\
+                                                            \vdots \\
+                                                            \cos^{3}\big(\omega\big) \\
+                                                            \cos^{2}\big(\omega\big) \\
+                                                            \cos^{1}\big(\omega\big) \\
+                                                            1 
+                                                          \end{bmatrix}
 \end{align*}
 
 \end{document}
