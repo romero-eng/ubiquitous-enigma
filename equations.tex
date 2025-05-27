@@ -192,7 +192,51 @@
                                                             \cos^{2}\big(\omega\big) \\
                                                             \cos^{1}\big(\omega\big) \\
                                                             1 
-                                                          \end{bmatrix}
+                                                          \end{bmatrix} \\ \\
+\end{align*}
+
+\textbf{\underline{Irreducible Quadratic}}
+
+\begin{align*}
+    f(z)&= \big(1 + \rho z^{-1}\big)\big(1 + \rho^{*}z^{-1}\big) \\ \\
+        &= \begin{bmatrix}
+                \big|\rho\big|^{2} \\ \\
+                2\big|\rho\big|\cos\big(\angle{\rho}\big) \\ \\
+                1
+             \end{bmatrix}^{T}
+           \begin{bmatrix}
+                z^{-2} \\ \\
+                z^{-1} \\ \\
+                1
+             \end{bmatrix} \\ \\
+    &\Rightarrow R_{cc}\big(n\big) = \begin{bmatrix}
+                                        \big|\rho\big|^{2} \\ \\
+                                        2\big|\rho\big|\Big(\big|\rho\big|^{2} + 1\Big)\cos\big(\angle{\rho}\big) \\ \\
+                                        1 + 4\big|\rho\big|^{2}\cos^{2}\big(\angle{\rho}\big) + \big|\rho\big|^{4}
+                                       \end{bmatrix}
+\end{align*}
+
+\begin{align*}
+    &\Rightarrow |f(\omega)|^{2} = 1 + 4\big|\rho\big|^{2}\cos^{2}\big(\angle{\rho}\big) + \big|\rho\big|^{4} + 2\begin{pmatrix}
+                                                                                                                    \begin{bmatrix}
+                                                                                                                         2 & 0 \\ \\
+                                                                                                                         0 & 1 \\ \\
+                                                                                                                        -1 & 0
+                                                                                                                      \end{bmatrix}
+                                                                                                                    \begin{bmatrix}
+                                                                                                                        \big|\rho\big|^{2} \\ \\
+                                                                                                                        2\big|\rho\big|\Big(\big|\rho\big|^{2} + 1\Big)\cos\big(\angle{\rho}\big)
+                                                                                                                      \end{bmatrix}
+                                                                                                                  \end{pmatrix}^{T}
+                                                                                                                \begin{bmatrix}
+                                                                                                                    \cos^{2}\big(\omega\big) \\ \\
+                                                                                                                    \cos\big(\omega\big) \\ \\
+                                                                                                                    1 
+                                                                                                                  \end{bmatrix} \\ \\
+    & \quad \quad \quad \quad \ \ = K^{2}\Bigg(\bigg(\cos\big(\omega\big) + \Gamma_{R}\bigg)^{2} + \Gamma_{I}^{2}\Bigg) \quad, \quad K = 2\big|\rho\big| \\ \\
+    & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \ \ \Gamma_{R} = \cos\big(\angle{\rho}\big)\cosh\Big(\ln\Big[\big|\rho\big|\Big]\Big) \\ \\
+    & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \ \ \Gamma_{I} = \sin\big(\angle{\rho}\big)\sinh\Big(\ln\Big[\big|\rho\big|\Big]\Big) \\ \\
+    & \quad \quad \quad \quad \ \ = K^{2}\Big(\cos\big(\omega\big) + \Gamma\Big)\Big(\cos\big(\omega\big) + \Gamma^{*}\Big) \quad , \quad \Gamma = \Gamma_{R} + j\Gamma_{I}
 \end{align*}
 
 \end{document}
