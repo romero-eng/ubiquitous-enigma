@@ -6,7 +6,7 @@
 \usepackage[margin=1.5cm]{geometry}
 \begin{document}
 
-\section {Appendix: Recurrence Relations from Complex Sequences}
+\section*{Appendix A: Complex Multi-Dimensional Matrix Recurrence Relations}
 
 Consider the complex causal sequence $q[n]$ and its implicit scalar recurrence relation:
 
@@ -131,9 +131,49 @@ The following outer product can then be expanded via this recurrence relation:
   \end{align*}
 
 \newpage
-\section {Appendix: Custom Notation for Element-wise Vector/Matrix-generating functions}
+\section*{Appendix B: Matrix Representation of Autocorrelation Sequence}
 
-Take a generic discrete function $f[n]$. The column vector $\vec{v}$ (populated by applying $f[n]$ element-wise to each row in the vector as a function of the row) can be denoted below as such:
+For a given causal sequence $x[n]$, the Autocorrelation is defined as $R_{xx}[n]$:
+
+\begin{align*}
+    R_{xx}[l]&= \sum_{n = 0}^{\infty}s[n]s[n + l] \quad, \quad s[n] \equiv x[n]\Big(\mu[n] - \mu[n - N]\Big) \\ \\
+             &= \sum_{n = 0}^{N - (l + 1)}x[n]x[n + l] \\ \\
+             &= \prescript{}{N}{\begin{bmatrix} x[n] \end{bmatrix}}
+                \begin{bmatrix}
+                    \vec{0} \\ \\
+                    \begin{bmatrix} x[n] \end{bmatrix}^{n = N - 1}_{n = l}
+                  \end{bmatrix} \\ \\
+             &= \Big( I_{N}\begin{bmatrix} x[n] \end{bmatrix}^{N} \Big)^{T}
+                \begin{pmatrix}
+                    \begin{bmatrix}
+                        0_{l, N - l} & 0_{    l, l} \\
+                        I_{   N - l} & 0_{N - l, l}
+                      \end{bmatrix}\begin{bmatrix} x[n] \end{bmatrix}^{N}
+                  \end{pmatrix} \\ \\
+             &=\prescript{}{N}{\begin{bmatrix} x[n] \end{bmatrix}}I_{N}\begin{bmatrix}
+                                                                            0_{l, N - l} & 0_{    l, l} \\
+                                                                            I_{   N - l} & 0_{N - l, l}
+                                                                         \end{bmatrix}\begin{bmatrix} x[n] \end{bmatrix}^{N} \\ \\
+             &=\prescript{}{N}{\begin{bmatrix} x[n] \end{bmatrix}}\begin{bmatrix}
+                                                                        0_{l, N - l} & 0_{    l, l} \\
+                                                                        I_{   N - l} & 0_{N - l, l}
+                                                                    \end{bmatrix}\begin{bmatrix} x[n] \end{bmatrix}^{N} \\ \\
+             &=\prescript{}{N}{\begin{bmatrix} x[n] \end{bmatrix}}\begin{bmatrix}
+                                                                        0_{l, N - l} & I_{N - l} \\
+                                                                        0_{l,     l} & 0_{N - l, l}
+                                                                    \end{bmatrix}\begin{bmatrix} x[n] \end{bmatrix}^{N} \\ \\
+             &=\prescript{}{N}{\begin{bmatrix} x[n] \end{bmatrix}}R_{N, l}\begin{bmatrix} x[n] \end{bmatrix}^{N} \quad, \quad R_{N, l} \equiv \begin{bmatrix}
+                                                                                                                                                    0_{l, N - l} & I_{N - l} \\
+                                                                                                                                                    0_{l,     l} & 0_{N - l, l}
+                                                                                                                                                \end{bmatrix}
+  \end{align*}
+
+\newpage
+\section*{Appendix C: Custom Notation for Vector/Matrix-generating Sequences}
+
+\hspace{5mm} Some of the recurrence relations in Appendix A rely on the mathematics of vector/matrix-generating sequences. However, there seems to be no standard notation for any kind of vector/matrix generated from such sequences. This Appendix contains some of my own custom notation which I created for expressing these vectors/matrixs in a concise manner.\newline 
+
+Take a generic sequence $f[n]$. The column vector $\vec{v}$ (populated by applying $f[n]$ element-wise to each row in the vector as a function of the row) can be denoted below as such:
 
 \begin{align*}
     \vec{v} = \begin{bmatrix} f[n] \end{bmatrix}^{N}
