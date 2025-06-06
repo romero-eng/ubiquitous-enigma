@@ -6,7 +6,51 @@
 \usepackage[margin=1.5cm]{geometry}
 \begin{document}
 
-\section*{Appendix A: Spectral Magnitude of DTFT}
+\section{Main}
+
+\newpage
+\section*{Appendix A: Spectral Magnitude of Irreducible Quadratic DTFT}
+
+\begin{align*}
+    f(z)&= \big(1 + \rho z^{-1}\big)\big(1 + \rho^{*}z^{-1}\big) \\ \\
+        &= 1 + 2\big|\rho\big|\cos\big(\angle{\rho}\big)z^{-1} + \big|\rho\big|^{2}z^{-2} \\ \\
+        &=\vec{c}^{T}\begin{bmatrix} z^{-n} \end{bmatrix}^{N} \quad, \quad \vec{c} \equiv \begin{bmatrix}
+                                                                                                                       \big|\rho\big|^{2} \\ \\
+                                                                                                2\big|\rho\big|\cos\big(\angle{\rho}\big) \\ \\
+                                                                                                                                        1
+                                                                                            \end{bmatrix} \\
+  \end{align*}
+
+\begin{equation*}
+    \Rightarrow R_cc[n] = \begin{cases}
+                                \quad \quad \quad \quad \quad \quad \quad \quad \ \ \big|\rho\big|^{2} \ , \quad n = 2 \\ \\
+                                2\big|\rho\big|\bigg(\big|\rho\big|^{2} + 1\bigg)\cos\big(\angle{\rho}\big) \ , \quad n = 1 \\ \\
+                                1 + 4\big|\rho\big|\cos^{2}\big(\angle{\rho}\big) + \big|\rho\big|^{4} \ , \quad n = 0
+                            \end{cases}
+  \end{equation*}
+
+\begin{align*}
+    \Rightarrow \Big|f\big(\omega\big)\Big|^{2}&= R_{cc}[0] + 2\sum_{n = 1}^{N - 1}R_{cc}[n]T_{n}\Big(\cos\big(\omega\big)\Big) \\ \\
+                                               &= R_{cc}[0] + 2\begin{bmatrix}
+                                                                   2R_{cc}[2] \\ \\
+                                                                    R_{cc}[1] \\ \\
+                                                                   -R_{cc}[2]
+                                                                 \end{bmatrix}^{T}
+                                                               \begin{bmatrix}
+                                                                   \cos^{2}\big(\omega\big) \\ \\
+                                                                       \cos\big(\omega\big) \\ \\
+                                                                                          1
+                                                                 \end{bmatrix} \\ \\
+                                               &= 4R_{cc}[2]\cos^{2}\big(\omega\big) + 2R_{cc}[1]\cos\big(\omega\big) + R_{cc}[0] - 2R_{cc}[2] \\ \\
+                                               &= 4R_{cc}[2]\Bigg(\cos\big(\omega\big) + \frac{R_{cc}[1]}{4R_{cc}[2]}\Bigg)^{2} + R_{cc}[0] - 2R_{cc}[2] - \frac{R_{cc}^{2}[1]}{4R_{cc}[2]} \\ \\
+                                               &= 4\big|\rho\big|^{2}\Bigg(\cos\big(\omega\big) + \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big)\Bigg)^{2} + R_{cc}[0] - 2R_{cc}[2] - \frac{R_{cc}^{2}[1]}{4R_{cc}[2]} \\ \\
+                                               &= 4\big|\rho\big|^{2}\Bigg(\cos\big(\omega\big) + \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big)\Bigg)^{2} + 4\big|\rho\big|^{2}\sin^{2}\big(\angle{\rho}\big)\sinh^{2}\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\
+                                               &= K\bigg[\Big(\cos\big(\omega\big) + \Gamma_{R}\Big)^{2} + \Gamma_{I}^{2}\bigg] \\ \\
+                                               &= K\Big[\cos\big(\omega\big) + \Gamma\Big]\Big[\cos\big(\omega\big) + \Gamma^{*}\Big]
+  \end{align*}
+
+\newpage
+\section*{Appendix B: Spectral Magnitude of General DTFT}
 
 \begin{align*}
     &\quad \ \ f(z) = \sum_{n = 0}^{N - 1}c_{n}z^{-n} \\ \\
@@ -28,11 +72,11 @@
     &\quad \quad \quad \quad \quad = \big|\big|\vec{c}\big|\big|^{2} + \sum_{n = 1}^{N - 1}\bigg( e^{-jn\omega}\vec{c}^{T}R_{N, n}\vec{c} + e^{ jn\omega}\vec{c}^{T}R_{N, n}\vec{c} \bigg) \\ \\
     &\quad \quad \quad \quad \quad = \big|\big|\vec{c}\big|\big|^{2} + \sum_{n = 1}^{N - 1}\vec{c}^{T}R_{N, n}\vec{c}\Big( e^{-jn\omega} + e^{ jn\omega} \Big) \\ \\
     &\quad \quad \quad \quad \quad = \big|\big|\vec{c}\big|\big|^{2} + \sum_{n = 1}^{N - 1}R_{cc}[n]\Big( 2\cos\big(n\omega\big) \Big) \\ \\
-    &\quad \quad \quad \quad \quad = \big|\big|\vec{c}\big|\big|^{2} + 2\sum_{n = 1}^{N - 1}R_{cc}[n]T_{n}\Big(\cos\big(\omega\big)\Big)
+    &\quad \quad \quad \quad \quad = R_{cc}[0] + 2\sum_{n = 1}^{N - 1}R_{cc}[n]T_{n}\Big(\cos\big(\omega\big)\Big)
   \end{align*}
 
 \newpage
-\section*{Appendix B: Complex Multi-Dimensional Matrix Recurrence Relations}
+\section*{Appendix C: Complex Multi-Dimensional Matrix Recurrence Relations}
 
 Consider the complex causal sequence $q[n]$ and its implicit scalar recurrence relation:
 
@@ -157,7 +201,7 @@ The following outer product can then be expanded via this recurrence relation:
   \end{align*}
 
 \newpage
-\section*{Appendix C: Matrix Representation of Autocorrelation Sequence}
+\section*{Appendix D: Matrix Representation of Autocorrelation Sequence}
 
 For a given causal sequence $x[n]$, the Autocorrelation is defined as $R_{xx}[n]$:
 
@@ -195,7 +239,7 @@ For a given causal sequence $x[n]$, the Autocorrelation is defined as $R_{xx}[n]
   \end{align*}
 
 \newpage
-\section*{Appendix D: Custom Notation for Vector/Matrix-generating Sequences}
+\section*{Appendix E: Custom Notation for Vector/Matrix-generating Sequences}
 
 \hspace{5mm} Some of the recurrence relations in Appendix A rely on the mathematics of vector/matrix-generating sequences. However, there seems to be no standard notation for any kind of vector/matrix generated from such sequences. This Appendix contains some of my own custom notation which I created for expressing these vectors/matrixs in a concise manner.\newline 
 
