@@ -8,6 +8,45 @@
 
 \section{Main}
 
+For an irreducible quadratic polynomial over the $\mathbb{Z}$-plane:
+
+\begin{align*}
+    &\quad \quad \quad f(z) = \big(1 + \rho z^{-1}\big)\big(1 + \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
+    &\Rightarrow \Big|f\big(\omega\big)\Big|^{2} = K\Big[\cos\big(\omega\big) + \Gamma\Big]\Big[\cos\big(\omega\big) + \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
+    & \quad \quad \quad \quad \quad \quad \quad \quad \text{where} \ K \equiv 4\big|\rho\big|^{2} \\ \\
+    & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{R} \equiv \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\  
+    & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{I} \equiv \sin\big(\angle{\rho}\big)\sinh\Big(\ln\big[\big|\rho\big|\big]\Big)
+  \end{align*}\newline
+
+Effectively, the squared spectral magnitude can be expressed as an irreducible polynomial (over $\cos\big(\omega\big)$ instead of $x$) with $\Gamma$ and its complex conjugate acting as the roots for this polynomial.
+
+\begin{align*}
+    &\quad \ \ \big|\Gamma\big|^{2} = \Gamma_{R}^{2} + \Gamma_{I}^{2} \\ \\
+    &\quad \quad \quad \ \ = \cos^{2}\big(\angle{\rho}\big)\cosh^{2}\Big(\ln\big[\big|\rho\big|\big]\Big) + \sin^{2}\big(\angle{\rho}\big)\sinh^{2}\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\
+    &\quad \quad \quad \ \ = \cosh^{2}\Big(\ln\big[\big|\rho\big|\big]\Big) - \sin^{2}\big(\angle{\rho}\big) \\ \\
+    &\quad \quad \quad \ \ = \bigg(\frac{1}{2}\bigg)\Bigg(\cosh\Big(\ln\big[\big|\rho\big|^{2}\big]\Big) + \cos\big(2\angle{\rho}\big)\Bigg) \\ \\
+    &\Rightarrow 2\big|\Gamma\big| = \cosh\Big(\ln\big[\big|\rho\big|^{2}\big]\Big) + \cos\big(2\angle{\rho}\big)
+  \end{align*}\newline
+
+The equation above is one of two equations needed to express $\Gamma$ in terms of $\rho$. The second equation is derived down below:
+
+\begin{align*}
+    & \quad \ \ \cosh^{2}\Big(\ln\big[\big|\rho\big|\big]\Big) - \sinh^{2}\Big(\ln\big[\big|\rho\big|\big]\Big) = 1 \\ \\
+    & \Rightarrow \frac{\Gamma_{R}^{2}}{\cos^{2}\big(\angle{\rho}\big)} - \frac{\Gamma_{I}^{2}}{\sin^{2}\big(\angle{\rho}\big)} = 1 \\ \\
+    & \Rightarrow \sin^{2}\big(\angle{\rho}\big)\Gamma_{R}^{2} - \cos^{2}\big(\angle{\rho}\big)\Gamma_{I}^{2} = \cos^{2}\big(\angle{\rho}\big)\sin^{2}\big(\angle{\rho}\big) \\ \\
+    & \Rightarrow \Gamma_{R}^{2} - \big|\Gamma\big|^{2}\cos^{2}\big(\angle{\rho}\big) = \cos^{2}\big(\angle{\rho}\big) - \cos^{4}\big(\angle{\rho}\big)
+  \end{align*}
+
+\newpage
+
+\begin{align*}
+    & \Rightarrow \Gamma_{R}^{2} - \big|\Gamma\big|^{2}\cos^{2}\big(\angle{\rho}\big) = \cos^{2}\big(\angle{\rho}\big) - \cos^{4}\big(\angle{\rho}\big) \\ \\
+    & \Rightarrow \Bigg[\cos^{2}\big(\angle{\rho}\big) - \Bigg(\frac{\big|\Gamma\big|^{2} + 1}{2}\Bigg)\Bigg]^{2} = \Bigg(\frac{\big|\Gamma\big|^{2} + 1}{2}\Bigg)^{2} - \Gamma_{R}^{2} \\ \\ 
+    & \Rightarrow \bigg[\cos\big(2\angle{\rho}\big) - \big|\Gamma\big|^{2}\bigg]^{2} = \big|\Gamma\big|^{4} - 2\cos\big(2\angle{\rho}\big)|\Gamma|^{2} + 1 \\ \\
+    & \Rightarrow \bigg[\cos\big(2\angle{\rho}\big) - \big|\Gamma\big|^{2}\bigg]^{2} = \bigg[\big|\Gamma\big|^{2} - e^{2j\angle{\Gamma}}\bigg]\bigg[\big|\Gamma\big|^{2} - e^{-2j\angle{\Gamma}}\bigg] \\ \\
+    & \Rightarrow \cos\big(2\angle{\rho}\big) = \big|\Gamma\big|^{2} \pm \sqrt{\bigg[\big|\Gamma\big|^{2} - e^{2j\angle{\Gamma}}\bigg]\bigg[\big|\Gamma\big|^{2} - e^{-2j\angle{\Gamma}}\bigg]}
+  \end{align*}
+
 \newpage
 \section*{Appendix A: Spectral Magnitude of Irreducible Quadratic DTFT}
 
