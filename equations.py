@@ -3,6 +3,7 @@ import numpy.typing as npt
 from typing import Callable
 
 # Calculation Modules
+import sys
 import numpy as np
 import scipy.signal as dsp
 from numpy.polynomial.chebyshev import chebval, cheb2poly
@@ -42,7 +43,8 @@ def plot_mag_func(b: list[float],
 
 
 def plot_irreducible_quadratic_mag_func(gamma_abs: float,
-                                        gamma_angle_deg: float) -> None: 
+                                        gamma_angle_deg: float,
+                                        gain: float) -> None: 
  
     gamma_abs_sq = np.square(gamma_abs)
     gamma_angle = (np.pi/180)*gamma_angle_deg
@@ -52,13 +54,13 @@ def plot_irreducible_quadratic_mag_func(gamma_abs: float,
     rho_abs = np.sqrt(eta - np.sqrt(np.square(eta) - 1))
     rho_angle = (1/2)*np.arccos(2*gamma_abs_sq - eta) 
 
-    K = 2*rho_abs
+    A = gain/(2*rho_abs)
 
-    plot_mag_func([1, 2*rho_abs*np.cos(rho_angle), np.square(rho_abs)],
-                  lambda w: K*np.sqrt(np.abs((np.cos(w) + gamma)*(np.cos(w) + np.conjugate(gamma)))))
+    plot_mag_func([A, 2*A*rho_abs*np.cos(rho_angle), A*np.square(rho_abs)],
+                  lambda w: gain*np.sqrt(np.abs((np.cos(w) + gamma)*(np.cos(w) + np.conjugate(gamma)))))
 
 
 if (__name__ == "__main__"):
 
-    plot_irreducible_quadratic_mag_func(2,
-                                        35)
+    plot_irreducible_quadratic_mag_func(2, float(sys.argv[1]), 1/2.9)
+
