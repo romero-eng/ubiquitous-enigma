@@ -11,6 +11,23 @@
 For an irreducible quadratic polynomial over the $\mathbb{Z}$-plane:
 
 \begin{align*}
+    & \quad \quad \quad f(z) = A\big(1 + \rho z^{-1}\big)\big(1 + \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
+    & \Rightarrow \Big|f\big(\omega\big)\Big|^{2} = G^{2}\Big[\cos\big(\omega\big) + \Gamma\Big]\Big[\cos\big(\omega\big) + \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
+    & \quad \quad \quad \quad \quad \quad \quad \quad \text{where} \ G \equiv 2A\big|\rho\big| \\ \\
+    & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{R} \equiv \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\  
+    & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{I} \equiv \sin\big(\angle{\rho}\big)\sinh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\
+    & \Rightarrow \eta = \big|\Gamma\big|^{2} + \sqrt{\big|\Gamma\big|^{4} - 2\cos\big(2\angle{\Gamma}\big)|\Gamma|^{2} + 1} \\ \\
+    & \Rightarrow \big|\rho\Big| = \sqrt{\eta - \sqrt{\eta^{2} - 1}} \\ \\
+    & \Rightarrow \angle{\rho} = \bigg(\frac{1}{2}\bigg)\arccos\Big(2\big|\Gamma\big|^{2} - \eta\Big) \\ \\
+    & \Rightarrow A = \frac{G}{2\big|\rho\big|}
+  \end{align*}
+
+\newpage
+\section*{Appendix A: Irreversible Quadratic Spectral Magnitude Design}
+
+For an irreducible quadratic polynomial over the $\mathbb{Z}$-plane:
+
+\begin{align*}
     &\quad \quad \quad f(z) = \big(1 + \rho z^{-1}\big)\big(1 + \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
     &\Rightarrow \Big|f\big(\omega\big)\Big|^{2} = K^{2}\Big[\cos\big(\omega\big) + \Gamma\Big]\Big[\cos\big(\omega\big) + \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
     & \quad \quad \quad \quad \quad \quad \quad \quad \text{where} \ K \equiv 2\big|\rho\big| \\ \\
@@ -66,7 +83,7 @@ Similarly, $\angle{\rho}$ can be calculated as a function of $\big|\Gamma\big|$ 
   \end{equation*}
 
 \newpage
-\section*{Appendix A: Spectral Magnitude of Irreducible Quadratic DTFT}
+\section*{Appendix B: Spectral Magnitude of Irreducible Quadratic DTFT}
 
 \begin{align*}
     f(z)&= \big(1 + \rho z^{-1}\big)\big(1 + \rho^{*}z^{-1}\big) \\ \\
@@ -107,7 +124,7 @@ Similarly, $\angle{\rho}$ can be calculated as a function of $\big|\Gamma\big|$ 
   \end{align*}
 
 \newpage
-\section*{Appendix B: Spectral Magnitude of General DTFT}
+\section*{Appendix C: Spectral Magnitude of General DTFT}
 
 \begin{align*}
     &\quad \ \ f(z) = \sum_{n = 0}^{N - 1}c_{n}z^{-n} \\ \\
@@ -133,7 +150,7 @@ Similarly, $\angle{\rho}$ can be calculated as a function of $\big|\Gamma\big|$ 
   \end{align*}
 
 \newpage
-\section*{Appendix C: Complex Multi-Dimensional Matrix Recurrence Relations}
+\section*{Appendix D: Complex Multi-Dimensional Matrix Recurrence Relations}
 
 Consider the complex causal sequence $q[n]$ and its implicit scalar recurrence relation:
 
@@ -258,7 +275,7 @@ The following outer product can then be expanded via this recurrence relation:
   \end{align*}
 
 \newpage
-\section*{Appendix D: Matrix Representation of Autocorrelation Sequence}
+\section*{Appendix E: Matrix Representation of Autocorrelation Sequence}
 
 For a given causal sequence $x[n]$, the Autocorrelation is defined as $R_{xx}[n]$:
 
@@ -296,7 +313,7 @@ For a given causal sequence $x[n]$, the Autocorrelation is defined as $R_{xx}[n]
   \end{align*}
 
 \newpage
-\section*{Appendix E: Custom Notation for Vector/Matrix-generating Sequences}
+\section*{Appendix F: Custom Notation for Vector/Matrix-generating Sequences}
 
 \hspace{5mm} Some of the recurrence relations in Appendix A rely on the mathematics of vector/matrix-generating sequences. However, there seems to be no standard notation for any kind of vector/matrix generated from such sequences. This Appendix contains some of my own custom notation which I created for expressing these vectors/matrixs in a concise manner.\newline 
 
