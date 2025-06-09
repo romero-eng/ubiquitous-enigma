@@ -41,35 +41,24 @@ def plot_mag_func(b: list[float],
     os.remove(png_filename)
 
 
-def plot_irreducible_quadratic_mag_func(mag_rho: float,
-                                        angle_deg_rho: float) -> None:
+def plot_irreducible_quadratic_mag_func(gamma_abs: float,
+                                        gamma_angle_deg: float) -> None: 
+ 
+    gamma_abs_sq = np.square(gamma_abs)
+    gamma_angle = (np.pi/180)*gamma_angle_deg
+    gamma = gamma_abs*np.exp(1j*gamma_angle)
 
-    K = 2*mag_rho
-    angle_rho = (np.pi/180)*angle_deg_rho
-    gamma_r = np.cos(angle_rho)*np.cosh(np.log(mag_rho))
-    gamma_i = np.sin(angle_rho)*np.sinh(np.log(mag_rho))
+    eta = gamma_abs_sq + np.sqrt(np.square(gamma_abs_sq) - 2*np.cos(2*gamma_angle)*gamma_abs_sq + 1)
+    rho_abs = np.sqrt(eta - np.sqrt(np.square(eta) - 1))
+    rho_angle = (1/2)*np.arccos(2*gamma_abs_sq - eta) 
 
-    b = [1, 2*mag_rho*np.cos(angle_rho), np.square(mag_rho)]
+    K = 2*rho_abs
 
-    irreducible_quadratic_mag_func: Callable[[npt.NDArray[np.float64]], npt.NDArray[np.float64]] = \
-        lambda w: K*np.sqrt(np.square(np.cos(w) + gamma_r) + np.square(gamma_i))
-
-    plot_mag_func(b, irreducible_quadratic_mag_func)
+    plot_mag_func([1, 2*rho_abs*np.cos(rho_angle), np.square(rho_abs)],
+                  lambda w: K*np.sqrt(np.abs((np.cos(w) + gamma)*(np.cos(w) + np.conjugate(gamma)))))
 
 
 if (__name__ == "__main__"):
 
-    """
-    b = [2.1, -4, 5, 3]
-
-    N = len(b) - 1
-    R_cc = np.correlate(b, b, "full")[N:]
-
-    simple_mag_func: Callable[[npt.NDArray[np.float64]], npt.NDArray[np.float64]] = \
-        lambda w: np.sqrt(R_cc[0] + 2*chebval(np.cos(w), np.insert(R_cc[1:], 0, 0)))
-
-    expanded_mag_func: Callable[[npt.NDArray[np.float64]], npt.NDArray[np.float64]] = \
-        lambda w: np.sqrt(R_cc[0] + 2*np.sum([coef*np.power(np.cos(w), n) for n, coef in enumerate(np.matmul(np.transpose(np.array([np.array(list(cheb2poly(n*[0] + [1])) + (N - n)*[0]) for n in range(N, 0, -1)])), R_cc[:0:-1]))], 0))  # noqa: E501
-    """
-
-    plot_irreducible_quadratic_mag_func(0.6432, 15)
+    plot_irreducible_quadratic_mag_func(2,
+                                        35)
