@@ -79,8 +79,10 @@ This second equation can then be plugged into the first equation to yield $\big|
 Similarly, $\angle{\rho}$ can be calculated as a function of $\big|\Gamma\big|$ and $\angle{\Gamma}$:
 
 \begin{equation*}
-    \angle{\rho} = \bigg(\frac{1}{2}\bigg)\arccos\Big(2\big|\Gamma\big|^{2} - \eta\Big)
-  \end{equation*}
+    \angle{\rho} = \arctan\Bigg( \frac{\tan\big(\angle{\rho}\big)}{\tanh\big(\big|\rho\big|\big)} \Bigg)
+  \end{equation*}\newline
+
+Just as a warning, the angle from the equation above has to be wrapped since it'll produce a negative $\angle{\rho}$ for any $\angle{\Gamma}^{\circ} > 90^{\circ}$ (i.e., $\Gamma_{R} < 0$).
 
 \newpage
 \section*{Appendix B: Spectral Magnitude of Irreducible Quadratic DTFT}
