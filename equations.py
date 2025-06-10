@@ -5,7 +5,7 @@ from typing import Callable
 # Calculation Modules
 import numpy as np
 import scipy.signal as dsp
-from numpy.polynomial.chebyshev import chebval, cheb2poly
+from numpy.polynomial.chebyshev import chebval, chebfromroots
 
 # Plotting Modules
 import os
@@ -15,18 +15,16 @@ matplotlib.use("Agg")  # flake8 supression to deal with matplotlib's usage of no
 import matplotlib.pyplot as plt  # noqa: E402
 
 
-def plot_mag_func(b: list[float],
-                  mag_func: Callable[[npt.NDArray[np.float64]], npt.NDArray[np.float64]]) -> None:
+def plot_mag_func(z_transform_coefs: npt.NDArray[np.float64],
+                  spectal_mag_sq_roots: npt.NDArray[np.float64 | np.complex128]) -> None:
 
-    print(f"\nActual Spectral Coefficients: {str(np.array(b)):s}\n")
-
-    [w, h] = dsp.freqz(b)
+    [omega, h_omega] = dsp.freqz(z_transform_coefs)
 
     sq_magnitudes: dict[str, npt.NDArray[np.float64]] = \
-        {"Theoretical": mag_func(w),
-              "Actual": np.abs(h)}  # noqa: E127
+        {"Theoretical": np.sqrt(chebval(np.cos(omega), np.real(chebfromroots(-1*np.array(spectal_mag_sq_roots))))),
+              "Actual": np.abs(h_omega)}  # noqa: E127
 
-    freq = w/(2*np.pi)
+    freq = omega/(2*np.pi)
     png_filename = "actual.png"
     [fig, axes] = plt.subplots(len(sq_magnitudes))
     for ax, title in zip(axes, list(sq_magnitudes.keys())):
@@ -43,26 +41,28 @@ def plot_mag_func(b: list[float],
     os.remove(png_filename)
 
 
-def plot_irreducible_quadratic_mag_func(gamma_abs: float,
-                                        gamma_angle_deg: float,
-                                        gain: float) -> None: 
+def calculate_z_coefs_from_complex_spectral_root(gamma: np.complex128) -> npt.NDArray[np.float64]: 
 
-    gamma_abs_sq = np.square(gamma_abs)
-    gamma_angle = (np.pi/180)*gamma_angle_deg
-    gamma = gamma_abs*np.exp(1j*gamma_angle)
+    gamma_abs_sq = np.square(np.abs(gamma))
+    gamma_angle = np.angle(gamma)
 
     eta = gamma_abs_sq + np.sqrt(np.square(gamma_abs_sq) - 2*np.cos(2*gamma_angle)*gamma_abs_sq + 1)
     rho_abs = np.sqrt(eta - np.sqrt(np.square(eta) - 1))
-    rho_angle = np.arctan(np.tan(gamma_angle)/np.tanh(np.log(rho_abs)))
-    A = gain/(2*rho_abs)
+    rho_angle = np.arctan(np.tan(gamma_angle)/np.tanh(np.log(rho_abs))) + np.pi*np.heaviside(gamma_angle - (np.pi/2), 0)
 
-    rho_angle += np.pi*np.heaviside(gamma_angle_deg - 90, 0)
+    z_coefs = (1/(2*rho_abs))*np.array([1, 2*rho_abs*np.cos(rho_angle), np.square(rho_abs)])
 
-    plot_mag_func([A, 2*A*rho_abs*np.cos(rho_angle), A*np.square(rho_abs)],
-                  lambda w: gain*np.sqrt(np.abs((np.cos(w) + gamma)*(np.cos(w) + np.conjugate(gamma)))))
+    return z_coefs
 
 
 if (__name__ == "__main__"):
 
-   plot_irreducible_quadratic_mag_func(2, 45, 1/2.8)
+    gamma_abs = 2
+    gamma_angle_deg = 45
+    gamma = gamma_abs*np.exp(1j*(np.pi/180)*gamma_angle_deg)
 
+    cheb_roots = np.array([gamma, np.conjugate(gamma)])
+
+    z_coefs = calculate_z_coefs_from_complex_spectral_root(cheb_roots[0])
+
+    plot_mag_func(z_coefs, cheb_roots)
