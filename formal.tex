@@ -18,7 +18,7 @@ For an irreducible quadratic polynomial over the $\mathbb{Z}$-plane:
     & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{I} \equiv \sin\big(\angle{\rho}\big)\sinh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\
     & \Rightarrow \eta = \big|\Gamma\big|^{2} + \sqrt{\big|\Gamma\big|^{4} - 2\cos\big(2\angle{\Gamma}\big)|\Gamma|^{2} + 1} \\ \\
     & \Rightarrow \big|\rho\Big| = \sqrt{\eta - \sqrt{\eta^{2} - 1}} \\ \\
-    & \Rightarrow \angle{\rho} = \bigg(\frac{1}{2}\bigg)\arccos\Big(2\big|\Gamma\big|^{2} - \eta\Big) \\ \\
+    & \Rightarrow \angle{\rho} = \arctan\Bigg( \frac{\tan\big(\angle{\rho}\big)}{\tanh\big(\big|\rho\big|\big)} \Bigg) + \pi * \mu\Big(\angle{\Gamma}^{\circ} - 90^{\circ}\Big) \\ \\
     & \Rightarrow A = \frac{G}{2\big|\rho\big|}
   \end{align*}
 
@@ -83,6 +83,10 @@ Similarly, $\angle{\rho}$ can be calculated as a function of $\big|\Gamma\big|$ 
   \end{equation*}\newline
 
 Just as a warning, the angle from the equation above has to be wrapped since it'll produce a negative $\angle{\rho}$ for any $\angle{\Gamma}^{\circ} > 90^{\circ}$ (i.e., $\Gamma_{R} < 0$).
+
+\begin{equation*}
+    \angle{\rho} = \arctan\Bigg( \frac{\tan\big(\angle{\rho}\big)}{\tanh\big(\big|\rho\big|\big)} \Bigg) + \pi * \mu\Big(\angle{\Gamma}^{\circ} - 90^{\circ}\Big)
+  \end{equation*}
 
 \newpage
 \section*{Appendix B: Spectral Magnitude of Irreducible Quadratic DTFT}
