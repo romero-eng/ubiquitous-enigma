@@ -5,7 +5,7 @@ from typing import Callable
 # Calculation Modules
 import numpy as np
 import scipy.signal as dsp
-from numpy.polynomial.chebyshev import chebval, chebfromroots
+from numpy.polynomial.chebyshev import chebval, poly2cheb
 
 # Plotting Modules
 import os
@@ -16,12 +16,12 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 
 def plot_mag_func(z_transform_coefs: npt.NDArray[np.float64],
-                  spectal_mag_sq_roots: npt.NDArray[np.float64 | np.complex128]) -> None:
+                  mag_sq_coefs: npt.NDArray[np.float64]) -> None:
 
     [omega, h_omega] = dsp.freqz(z_transform_coefs)
 
     sq_magnitudes: dict[str, npt.NDArray[np.float64]] = \
-        {"Theoretical": np.sqrt(chebval(np.cos(omega), np.real(chebfromroots(-1*np.array(spectal_mag_sq_roots))))),
+        {"Theoretical": np.sqrt(chebval(np.cos(omega), poly2cheb(mag_sq_coefs))),
               "Actual": np.abs(h_omega)}  # noqa: E127
 
     freq = omega/(2*np.pi)
@@ -41,7 +41,7 @@ def plot_mag_func(z_transform_coefs: npt.NDArray[np.float64],
     os.remove(png_filename)
 
 
-def calculate_z_coefs_from_complex_spectral_root(gamma: np.complex128) -> npt.NDArray[np.float64]: 
+def plot_complex_spectral_root(gamma: np.complex128) -> None: 
 
     gamma_abs_sq = np.square(np.abs(gamma))
     gamma_angle = np.angle(gamma)
@@ -52,17 +52,36 @@ def calculate_z_coefs_from_complex_spectral_root(gamma: np.complex128) -> npt.ND
 
     z_coefs = (1/(2*rho_abs))*np.array([1, 2*rho_abs*np.cos(rho_angle), np.square(rho_abs)])
 
-    return z_coefs
+    mag_sq_coefs = np.array([gamma_abs_sq, 2*np.cos(gamma_angle)*np.sqrt(gamma_abs_sq), 1])
+
+    plot_mag_func(z_coefs, mag_sq_coefs)
+
+
+def plot_real_spectral_root(gamma: np.float64) -> None:
+
+    gamma_abs = np.abs(gamma)
+    gamma_sign = np.sign(gamma)
+
+    rho_abs = gamma_abs - np.sqrt(np.square(gamma_abs) - 1)
+    rho = gamma_sign*rho_abs
+
+    z_coefs = np.array([1, rho])/np.sqrt(2*rho_abs)
+
+    mag_sq_coefs = np.array([gamma_abs, gamma_sign])
+
+    plot_mag_func(z_coefs, mag_sq_coefs)
 
 
 if (__name__ == "__main__"):
-
+   
+    """ 
     gamma_abs = 2
     gamma_angle_deg = 45
     gamma = gamma_abs*np.exp(1j*(np.pi/180)*gamma_angle_deg)
 
-    cheb_roots = np.array([gamma, np.conjugate(gamma)])
+    plot_complex_spectral_root(gamma)
+    """
 
-    z_coefs = calculate_z_coefs_from_complex_spectral_root(cheb_roots[0])
+    gamma = np.array([-1.33611])[0]
 
-    plot_mag_func(z_coefs, cheb_roots)
+    plot_real_spectral_root(gamma)
