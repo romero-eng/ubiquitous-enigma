@@ -3,32 +3,88 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{mathtools}
+\DeclareMathOperator{\sgn}{sgn}
 \usepackage[margin=1.5cm]{geometry}
 \begin{document}
 
 \section{Main}
 
-For an irreducible quadratic polynomial over the $\mathbb{Z}$-plane:
+For an irreducible second-order polynomial over the $\mathbb{Z}$-plane:
 
 \begin{align*}
-    & \quad \quad \quad f(z) = A\big(1 - \rho z^{-1}\big)\big(1 - \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
-    & \Rightarrow \Big|f\big(\omega\big)\Big|^{2} = G^{2}\Big[\cos\big(\omega\big) - \Gamma\Big]\Big[\cos\big(\omega\big) - \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
-    & \quad \quad \quad \quad \quad \quad \quad \quad \text{where} \ G \equiv 2A\big|\rho\big| \\ \\
-    & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{R} \equiv \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\  
+    & \quad \quad \quad f(z) = \bigg(\frac{1}{2\big|\rho\big|}\bigg)\big(1 - \rho z^{-1}\big)\big(1 - \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
+    & \Rightarrow \Big|f\big(\omega\big)\Big|^{2} = \Big[\cos\big(\omega\big) - \Gamma\Big]\Big[\cos\big(\omega\big) - \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
+    & \quad \quad \quad \quad \quad \quad \quad \quad \text{where} \ \Gamma_{R} \equiv \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \ , \\ \\  
     & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{I} \equiv \sin\big(\angle{\rho}\big)\sinh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\
     & \Rightarrow \eta = \big|\Gamma\big|^{2} + \sqrt{\big|\Gamma\big|^{4} - 2\cos\big(2\angle{\Gamma}\big)|\Gamma|^{2} + 1} \\ \\
     & \Rightarrow \big|\rho\Big| = \sqrt{\eta - \sqrt{\eta^{2} - 1}} \\ \\
-    & \Rightarrow \angle{\rho} = \arctan\Bigg( \frac{\tan\big(\angle{\rho}\big)}{\tanh\big(\big|\rho\big|\big)} \Bigg) + \pi * \mu\Big(\angle{\Gamma}^{\circ} - 90^{\circ}\Big) \\ \\
-    & \Rightarrow A = \frac{G}{2\big|\rho\big|}
+    & \Rightarrow \angle{\rho} = \arctan\Bigg( \frac{\tan\big(\angle{\rho}\big)}{\tanh\big(\big|\rho\big|\big)} \Bigg) + \pi * \mu\Big(\angle{\Gamma}^{\circ} - 90^{\circ}\Big)
+  \end{align*}\newline
+
+Similarly, for a first-order polynomial over the $\mathbb{Z}$-plane:
+
+\begin{align*}
+    & \quad \ \ f(z) = \frac{1}{\sqrt{2\big|\rho\big|}}\big[1 - \rho z^{-1}\big] \\ \\
+    & \Rightarrow \Big|f\big(\omega\big)\Big|^{2} = -\sgn\big(\Gamma\big)\bigg[\cos\big(\omega\big) - \Gamma\bigg] \\ \\ 
+    & \Rightarrow \big|\rho\big| = \big|\Gamma\big| - \sqrt{\big|\Gamma\big|^{2} - 1} \\ \\
+    & \Rightarrow \sgn\big(\rho\big) = \sgn\big(\Gamma\big)
   \end{align*}
 
 \newpage
-\section*{Appendix A: Irreversible Quadratic Spectral Magnitude Design}
+\section*{Appendix A: First-Order Spectral Magnitude Design}
 
-For an irreducible quadratic polynomial over the $\mathbb{Z}$-plane:
+For an first-order polynomial over the $\mathbb{Z}$-plane:
 
 \begin{align*}
-    &\quad \quad \quad f(z) = \big(1 - \rho z^{-1}\big)\big(1 - \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
+    & \quad \ \ f(z) = 1 - \rho z^{-1} \ , \quad \rho \in \mathbb{R} \ , \quad \big|\rho\big| < 1 \\ \\
+    & \Rightarrow \Big|f\big(\omega\big)\Big|^{2} = 1 + \big|\rho\big|^{2} - 2\rho\cos\big(\omega\big) \\ \\
+    & \quad \quad \quad \quad \ \ \ = 2\big|\rho\big|\Bigg(\frac{\big|\rho\big| + \big|\rho\big|^{-1}}{2}\Bigg) - 2\rho\cos\big(\omega\big) \\ \\
+    & \quad \quad \quad \quad \ \ \ = 2\big|\rho\big|\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) - 2\rho\cos\big(\omega\big) \\ \\
+    & \quad \quad \quad \quad \ \ \ = 2\Bigg[\big|\rho\big|\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) - \rho\cos\big(\omega\big)\Bigg] \\ \\
+    & \quad \quad \quad \quad \ \ \ = 2\Bigg[\sgn^{2}\big(\rho\big)\big|\rho\big|\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) - \rho\cos\big(\omega\big)\Bigg] \\ \\
+    & \quad \quad \quad \quad \ \ \ = 2\Bigg[\sgn\big(\rho\big)\rho\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) - \rho\cos\big(\omega\big)\Bigg] \\ \\
+    & \quad \quad \quad \quad \ \ \ = 2\rho\Bigg[\sgn\big(\rho\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) - \cos\big(\omega\big)\Bigg] \\ \\
+    & \quad \quad \quad \quad \ \ \ = 2\rho\bigg[\Gamma - \cos\big(\omega\big)\bigg] \ , \quad \Gamma \equiv \sgn\big(\rho\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \ , \\ \\
+    & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \big|\Gamma\big| = \cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \ , \\ \\
+    & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \sgn\big(\Gamma\big) = \sgn\big(\rho\big)
+  \end{align*}\newline
+
+Focusing on $\big|\Gamma\big|$, we can derive the following equations:
+
+\begin{align*}
+    & \Gamma = \sgn\big(\rho\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\
+    & \Rightarrow \big|\rho\big| = \big|\Gamma\big| \pm \sqrt{\big|\Gamma\big|^{2} - 1} \\ \\
+    & \quad \quad \ \ \ = \big|\Gamma\big| - \sqrt{\big|\Gamma\big|^{2} - 1}
+  \end{align*}
+
+\newpage
+
+This yields the following equations:
+
+\begin{align*}
+    & \quad \ \ f(z) = 1 - \rho z^{-1} \\ \\
+    & \Rightarrow \Big|f\big(\omega\big)\Big|^{2} = 2\rho\bigg[\Gamma - \cos\big(\omega\big)\bigg] \\ \\
+    & \quad \quad \quad \quad \quad = 2\sgn\big(\rho\big)\big|\rho\big|\bigg[\Gamma - \cos\big(\omega\big)\bigg] \\ \\
+    & \quad \quad \quad \quad \quad = 2\sgn\big(\Gamma\big)\big|\rho\big|\bigg[\Gamma - \cos\big(\omega\big)\bigg] \\ \\
+    & \quad \quad \quad \quad \quad = -2\big|\rho\big|\sgn\big(\Gamma\big)\bigg[\cos\big(\omega\big) - \Gamma\bigg]
+  \end{align*}\newline
+
+With a normalized spectral magnitude, we then get the final equations:
+
+\begin{align*}
+    & \quad \ \ f(z) = \frac{1}{\sqrt{2\big|\rho\big|}}\big[1 - \rho z^{-1}\big] \\ \\
+    & \Rightarrow \Big|f\big(\omega\big)\Big|^{2} = -\sgn\big(\Gamma\big)\bigg[\cos\big(\omega\big) - \Gamma\bigg] \\ \\ 
+    & \Rightarrow \big|\rho\big| = \big|\Gamma\big| - \sqrt{\big|\Gamma\big|^{2} - 1} \\ \\
+    & \Rightarrow \sgn\big(\rho\big) = \sgn\big(\Gamma\big)
+  \end{align*}
+
+\newpage
+\section*{Appendix B: Irreducible Second-Order Spectral Magnitude Design}
+
+For an irreducible second-order polynomial over the $\mathbb{Z}$-plane:
+
+\begin{align*}
+    &\quad \quad \quad f(z) = \big(1 - \rho z^{-1}\big)\big(1 - \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \ , \quad \big|\rho\big| < 1 \\ \\
     &\Rightarrow \Big|f\big(\omega\big)\Big|^{2} = K^{2}\Big[\cos\big(\omega\big) - \Gamma\Big]\Big[\cos\big(\omega\big) - \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
     & \quad \quad \quad \quad \quad \quad \quad \quad \text{where} \ K \equiv 2\big|\rho\big| \\ \\
     & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{R} \equiv \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\  
@@ -61,7 +117,12 @@ The equation above is one of two equations needed to express $\Gamma$ in terms o
     & \Rightarrow \Bigg[\cos^{2}\big(\angle{\rho}\big) - \Bigg(\frac{\big|\Gamma\big|^{2} + 1}{2}\Bigg)\Bigg]^{2} = \Bigg(\frac{\big|\Gamma\big|^{2} + 1}{2}\Bigg)^{2} - \Gamma_{R}^{2} \\ \\ 
     & \Rightarrow \bigg[\cos\big(2\angle{\rho}\big) - \big|\Gamma\big|^{2}\bigg]^{2} = \big|\Gamma\big|^{4} - 2\cos\big(2\angle{\Gamma}\big)|\Gamma|^{2} + 1 \\ \\
     & \Rightarrow \bigg[\cos\big(2\angle{\rho}\big) - \big|\Gamma\big|^{2}\bigg]^{2} = \bigg[\big|\Gamma\big|^{2} - e^{2j\angle{\Gamma}}\bigg]\bigg[\big|\Gamma\big|^{2} - e^{-2j\angle{\Gamma}}\bigg] \\ \\
-    & \Rightarrow \cos\big(2\angle{\rho}\big) = \big|\Gamma\big|^{2} \pm \sqrt{\bigg[\big|\Gamma\big|^{2} - e^{2j\angle{\Gamma}}\bigg]\bigg[\big|\Gamma\big|^{2} - e^{-2j\angle{\Gamma}}\bigg]} \\ \\
+    & \Rightarrow \cos\big(2\angle{\rho}\big) = \big|\Gamma\big|^{2} \pm \sqrt{\bigg[\big|\Gamma\big|^{2} - e^{2j\angle{\Gamma}}\bigg]\bigg[\big|\Gamma\big|^{2} - e^{-2j\angle{\Gamma}}\bigg]}
+  \end{align*}
+
+From the two different given solutions, the numerically smaller solution is chosen:
+
+\begin{align*}
     & \Rightarrow \cos\big(2\angle{\rho}\big) = \big|\Gamma\big|^{2} - \sqrt{\bigg[\big|\Gamma\big|^{2} - e^{2j\angle{\Gamma}}\bigg]\bigg[\big|\Gamma\big|^{2} - e^{-2j\angle{\Gamma}}\bigg]}
   \end{align*}\newline
 
@@ -69,12 +130,20 @@ This second equation can then be plugged into the first equation to yield $\big|
 
 \begin{align*}
     & \Rightarrow 2\big|\Gamma\big|^{2} = \cosh\Big(\ln\big[\big|\rho\big|^{2}\big]\Big) + \big|\Gamma\big|^{2} - \sqrt{\bigg[\big|\Gamma\big|^{2} - e^{2j\angle{\Gamma}}\bigg]\bigg[\big|\Gamma\big|^{2} - e^{-2j\angle{\Gamma}}\bigg]} \\ \\
-    & \Rightarrow \cosh\Big(\ln\big[\big|\rho\big|^{2}\big]\Big) = \eta = \big|\Gamma\big|^{2} + \sqrt{\bigg[\big|\Gamma\big|^{2} - e^{2j\angle{\Gamma}}\bigg]\bigg[\big|\Gamma\big|^{2} - e^{-2j\angle{\Gamma}}\bigg]} \\ \\
-    & \quad \quad \quad \quad \quad \quad \quad \quad \ \ = \eta \\ \\
+    & \Rightarrow \eta = \cosh\Big(\ln\big[\big|\rho\big|^{2}\big]\Big) = \big|\Gamma\big|^{2} + \sqrt{\bigg[\big|\Gamma\big|^{2} - e^{2j\angle{\Gamma}}\bigg]\bigg[\big|\Gamma\big|^{2} - e^{-2j\angle{\Gamma}}\bigg]} \\ \\
     & \Rightarrow \big|\rho\big|^{2} = \eta \pm \sqrt{\eta^{2} - 1} \\ \\
-    & \quad \quad \quad \ = \eta - \sqrt{\eta^{2} - 1} \\ \\
+    & \Rightarrow \big|\rho\big|^{2} = \eta + \sqrt{\eta^{2} - 1} \ , \ \eta - \sqrt{\eta^{2} - 1} \\ \\
+    & \Rightarrow \big|\rho\big|^{2} = \eta + \sqrt{\eta^{2} - 1} \ , \ \frac{1}{\eta + \sqrt{\eta^{2} - 1}}
+  \end{align*}
+
+Again, between the two given solutions, the numerically smaller solution is given:
+
+\begin{align*}
+    & \Rightarrow \big|\rho\big|^{2} = \eta - \sqrt{\eta^{2} - 1} \\ \\
     & \Rightarrow \big|\rho\big| = \sqrt{\eta - \sqrt{\eta^{2} - 1}} \ , \quad \eta = \big|\Gamma\big|^{2} + \sqrt{\big|\Gamma\big|^{4} - 2\cos\big(2\angle{\Gamma}\big)|\Gamma|^{2} + 1}
   \end{align*}\newline
+
+\newpage
 
 Similarly, $\angle{\rho}$ can be calculated as a function of $\big|\Gamma\big|$ and $\angle{\Gamma}$:
 
@@ -86,13 +155,25 @@ Just as a warning, the angle from the equation above has to be wrapped since it'
 
 \begin{equation*}
     \angle{\rho} = \arctan\Bigg( \frac{\tan\big(\angle{\rho}\big)}{\tanh\big(\big|\rho\big|\big)} \Bigg) + \pi * \mu\Big(\angle{\Gamma}^{\circ} - 90^{\circ}\Big)
-  \end{equation*}
+  \end{equation*}\newline
 
-\newpage
-\section*{Appendix B: Spectral Magnitude of Irreducible Quadratic DTFT}
+Finally, the squared spectral magnitude and corresponding z-transform coefficients are normalized to yield the final equations down below: 
 
 \begin{align*}
-    f(z)&= \big(1 - \rho z^{-1}\big)\big(1 - \rho^{*}z^{-1}\big) \\ \\
+    & \quad \quad \quad f(z) = \bigg(\frac{1}{2\big|\rho\big|}\bigg)\big(1 - \rho z^{-1}\big)\big(1 - \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
+    & \Rightarrow \Big|f\big(\omega\big)\Big|^{2} = \Big[\cos\big(\omega\big) - \Gamma\Big]\Big[\cos\big(\omega\big) - \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
+    & \quad \quad \quad \quad \quad \quad \quad \quad \text{where} \ \Gamma_{R} \equiv \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \ , \\ \\  
+    & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{I} \equiv \sin\big(\angle{\rho}\big)\sinh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\
+    & \Rightarrow \eta = \big|\Gamma\big|^{2} + \sqrt{\big|\Gamma\big|^{4} - 2\cos\big(2\angle{\Gamma}\big)|\Gamma|^{2} + 1} \\ \\
+    & \Rightarrow \big|\rho\Big| = \sqrt{\eta - \sqrt{\eta^{2} - 1}} \\ \\
+    & \Rightarrow \angle{\rho} = \arctan\Bigg( \frac{\tan\big(\angle{\rho}\big)}{\tanh\big(\big|\rho\big|\big)} \Bigg) + \pi * \mu\Big(\angle{\Gamma}^{\circ} - 90^{\circ}\Big)
+  \end{align*}
+
+\newpage
+\section*{Appendix C: Spectral Magnitude of Irreducible Second-Order DTFT}
+
+\begin{align*}
+    f(z)&= \big(1 - \rho z^{-1}\big)\big(1 - \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \ , \quad \big|\rho\big| < 1 \\ \\
         &= 1 - 2\big|\rho\big|\cos\big(\angle{\rho}\big)z^{-1} + \big|\rho\big|^{2}z^{-2} \\ \\
         &=\vec{c}^{T}\begin{bmatrix} z^{-n} \end{bmatrix}^{N} \quad, \quad \vec{c} \equiv \begin{bmatrix}
                                                                                                                         \big|\rho\big|^{2} \\ \\
@@ -130,7 +211,7 @@ Just as a warning, the angle from the equation above has to be wrapped since it'
   \end{align*}
 
 \newpage
-\section*{Appendix C: Spectral Magnitude of General DTFT}
+\section*{Appendix D: Spectral Magnitude of General DTFT}
 
 \begin{align*}
     &\quad \ \ f(z) = \sum_{n = 0}^{N - 1}c_{n}z^{-n} \\ \\
@@ -156,7 +237,7 @@ Just as a warning, the angle from the equation above has to be wrapped since it'
   \end{align*}
 
 \newpage
-\section*{Appendix D: Complex Multi-Dimensional Matrix Recurrence Relations}
+\section*{Appendix E: Complex Multi-Dimensional Matrix Recurrence Relations}
 
 Consider the complex causal sequence $q[n]$ and its implicit scalar recurrence relation:
 
@@ -281,7 +362,7 @@ The following outer product can then be expanded via this recurrence relation:
   \end{align*}
 
 \newpage
-\section*{Appendix E: Matrix Representation of Autocorrelation Sequence}
+\section*{Appendix F: Matrix Representation of Autocorrelation Sequence}
 
 For a given causal sequence $x[n]$, the Autocorrelation is defined as $R_{xx}[n]$:
 
@@ -319,7 +400,7 @@ For a given causal sequence $x[n]$, the Autocorrelation is defined as $R_{xx}[n]
   \end{align*}
 
 \newpage
-\section*{Appendix F: Custom Notation for Vector/Matrix-generating Sequences}
+\section*{Appendix G: Custom Notation for Vector/Matrix-generating Sequences}
 
 \hspace{5mm} Some of the recurrence relations in Appendix A rely on the mathematics of vector/matrix-generating sequences. However, there seems to be no standard notation for any kind of vector/matrix generated from such sequences. This Appendix contains some of my own custom notation which I created for expressing these vectors/matrixs in a concise manner.\newline 
 
