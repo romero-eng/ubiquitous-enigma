@@ -50,9 +50,9 @@ def plot_complex_spectral_root(gamma: np.complex128) -> None:
     rho_abs = np.sqrt(eta - np.sqrt(np.square(eta) - 1))
     rho_angle = np.arctan(np.tan(gamma_angle)/np.tanh(np.log(rho_abs))) + np.pi*np.heaviside(gamma_angle - (np.pi/2), 0)
 
-    z_coefs = (1/(2*rho_abs))*np.array([1, 2*rho_abs*np.cos(rho_angle), np.square(rho_abs)])
+    z_coefs = (1/(2*rho_abs))*np.array([1, -2*rho_abs*np.cos(rho_angle), np.square(rho_abs)])
 
-    mag_sq_coefs = np.array([gamma_abs_sq, 2*np.cos(gamma_angle)*np.sqrt(gamma_abs_sq), 1])
+    mag_sq_coefs = np.array([gamma_abs_sq, -2*np.cos(gamma_angle)*np.sqrt(gamma_abs_sq), 1])
 
     plot_mag_func(z_coefs, mag_sq_coefs)
 
@@ -65,9 +65,9 @@ def plot_real_spectral_root(gamma: np.float64) -> None:
     rho_abs = gamma_abs - np.sqrt(np.square(gamma_abs) - 1)
     rho = gamma_sign*rho_abs
 
-    z_coefs = np.array([1, rho])/np.sqrt(2*rho_abs)
+    z_coefs = np.array([1, -rho])/np.sqrt(2*rho_abs)
 
-    mag_sq_coefs = np.array([gamma_abs, gamma_sign])
+    mag_sq_coefs = np.array([gamma_abs, -gamma_sign])
 
     plot_mag_func(z_coefs, mag_sq_coefs)
 
@@ -81,7 +81,7 @@ if (__name__ == "__main__"):
 
     plot_complex_spectral_root(gamma)
     """
-
-    gamma = np.array([-1.33611])[0]
+    gamma = np.array([1.33611])[0]
 
     plot_real_spectral_root(gamma)
+    #"""

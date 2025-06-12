@@ -11,8 +11,8 @@
 For an irreducible quadratic polynomial over the $\mathbb{Z}$-plane:
 
 \begin{align*}
-    & \quad \quad \quad f(z) = A\big(1 + \rho z^{-1}\big)\big(1 + \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
-    & \Rightarrow \Big|f\big(\omega\big)\Big|^{2} = G^{2}\Big[\cos\big(\omega\big) + \Gamma\Big]\Big[\cos\big(\omega\big) + \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
+    & \quad \quad \quad f(z) = A\big(1 - \rho z^{-1}\big)\big(1 - \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
+    & \Rightarrow \Big|f\big(\omega\big)\Big|^{2} = G^{2}\Big[\cos\big(\omega\big) - \Gamma\Big]\Big[\cos\big(\omega\big) - \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
     & \quad \quad \quad \quad \quad \quad \quad \quad \text{where} \ G \equiv 2A\big|\rho\big| \\ \\
     & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{R} \equiv \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\  
     & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{I} \equiv \sin\big(\angle{\rho}\big)\sinh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\
@@ -28,8 +28,8 @@ For an irreducible quadratic polynomial over the $\mathbb{Z}$-plane:
 For an irreducible quadratic polynomial over the $\mathbb{Z}$-plane:
 
 \begin{align*}
-    &\quad \quad \quad f(z) = \big(1 + \rho z^{-1}\big)\big(1 + \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
-    &\Rightarrow \Big|f\big(\omega\big)\Big|^{2} = K^{2}\Big[\cos\big(\omega\big) + \Gamma\Big]\Big[\cos\big(\omega\big) + \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
+    &\quad \quad \quad f(z) = \big(1 - \rho z^{-1}\big)\big(1 - \rho^{*}z^{-1}\big) \ , \quad \rho \in \mathbb{C} \\ \\
+    &\Rightarrow \Big|f\big(\omega\big)\Big|^{2} = K^{2}\Big[\cos\big(\omega\big) - \Gamma\Big]\Big[\cos\big(\omega\big) - \Gamma^{*}\Big] \ , \quad \Gamma \in \mathbb{C} \\ \\ 
     & \quad \quad \quad \quad \quad \quad \quad \quad \text{where} \ K \equiv 2\big|\rho\big| \\ \\
     & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{R} \equiv \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\  
     & \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \Gamma_{I} \equiv \sin\big(\angle{\rho}\big)\sinh\Big(\ln\big[\big|\rho\big|\big]\Big)
@@ -92,20 +92,20 @@ Just as a warning, the angle from the equation above has to be wrapped since it'
 \section*{Appendix B: Spectral Magnitude of Irreducible Quadratic DTFT}
 
 \begin{align*}
-    f(z)&= \big(1 + \rho z^{-1}\big)\big(1 + \rho^{*}z^{-1}\big) \\ \\
-        &= 1 + 2\big|\rho\big|\cos\big(\angle{\rho}\big)z^{-1} + \big|\rho\big|^{2}z^{-2} \\ \\
+    f(z)&= \big(1 - \rho z^{-1}\big)\big(1 - \rho^{*}z^{-1}\big) \\ \\
+        &= 1 - 2\big|\rho\big|\cos\big(\angle{\rho}\big)z^{-1} + \big|\rho\big|^{2}z^{-2} \\ \\
         &=\vec{c}^{T}\begin{bmatrix} z^{-n} \end{bmatrix}^{N} \quad, \quad \vec{c} \equiv \begin{bmatrix}
-                                                                                                                       \big|\rho\big|^{2} \\ \\
-                                                                                                2\big|\rho\big|\cos\big(\angle{\rho}\big) \\ \\
-                                                                                                                                        1
+                                                                                                                        \big|\rho\big|^{2} \\ \\
+                                                                                                -2\big|\rho\big|\cos\big(\angle{\rho}\big) \\ \\
+                                                                                                                                         1
                                                                                             \end{bmatrix} \\
   \end{align*}
 
 \begin{equation*}
     \Rightarrow R_{cc}[n] = \begin{cases}
-                                \quad \quad \quad \quad \quad \quad \quad \quad \ \ \big|\rho\big|^{2} \ , \quad n = 2 \\ \\
-                                2\big|\rho\big|\bigg(\big|\rho\big|^{2} + 1\bigg)\cos\big(\angle{\rho}\big) \ , \quad n = 1 \\ \\
-                                1 + 4\big|\rho\big|\cos^{2}\big(\angle{\rho}\big) + \big|\rho\big|^{4} \ , \quad n = 0
+                                \ \ \quad \quad \quad \quad \quad \quad \quad \quad \ \ \big|\rho\big|^{2} \ , \quad n = 2 \\ \\
+                                -2\big|\rho\big|\bigg(\big|\rho\big|^{2} + 1\bigg)\cos\big(\angle{\rho}\big) \ , \quad n = 1 \\ \\
+                                \ \ 1 + 4\big|\rho\big|\cos^{2}\big(\angle{\rho}\big) + \big|\rho\big|^{4} \ , \quad n = 0
                               \end{cases}
   \end{equation*}
 
@@ -123,10 +123,10 @@ Just as a warning, the angle from the equation above has to be wrapped since it'
                                                                  \end{bmatrix} \\ \\
                                                &= 4R_{cc}[2]\cos^{2}\big(\omega\big) + 2R_{cc}[1]\cos\big(\omega\big) + R_{cc}[0] - 2R_{cc}[2] \\ \\
                                                &= 4R_{cc}[2]\Bigg(\cos\big(\omega\big) + \frac{R_{cc}[1]}{4R_{cc}[2]}\Bigg)^{2} + R_{cc}[0] - 2R_{cc}[2] - \frac{R_{cc}^{2}[1]}{4R_{cc}[2]} \\ \\
-                                               &= 4\big|\rho\big|^{2}\Bigg(\cos\big(\omega\big) + \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big)\Bigg)^{2} + R_{cc}[0] - 2R_{cc}[2] - \frac{R_{cc}^{2}[1]}{4R_{cc}[2]} \\ \\
-                                               &= 4\big|\rho\big|^{2}\Bigg(\cos\big(\omega\big) + \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big)\Bigg)^{2} + 4\big|\rho\big|^{2}\sin^{2}\big(\angle{\rho}\big)\sinh^{2}\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\
-                                               &= K\bigg[\Big(\cos\big(\omega\big) + \Gamma_{R}\Big)^{2} + \Gamma_{I}^{2}\bigg] \\ \\
-                                               &= K\Big[\cos\big(\omega\big) + \Gamma\Big]\Big[\cos\big(\omega\big) + \Gamma^{*}\Big]
+                                               &= 4\big|\rho\big|^{2}\Bigg(\cos\big(\omega\big) - \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big)\Bigg)^{2} + R_{cc}[0] - 2R_{cc}[2] - \frac{R_{cc}^{2}[1]}{4R_{cc}[2]} \\ \\
+                                               &= 4\big|\rho\big|^{2}\Bigg(\cos\big(\omega\big) - \cos\big(\angle{\rho}\big)\cosh\Big(\ln\big[\big|\rho\big|\big]\Big)\Bigg)^{2} + 4\big|\rho\big|^{2}\sin^{2}\big(\angle{\rho}\big)\sinh^{2}\Big(\ln\big[\big|\rho\big|\big]\Big) \\ \\
+                                               &= K\bigg[\Big(\cos\big(\omega\big) - \Gamma_{R}\Big)^{2} + \Gamma_{I}^{2}\bigg] \\ \\
+                                               &= K\Big[\cos\big(\omega\big) - \Gamma\Big]\Big[\cos\big(\omega\big) - \Gamma^{*}\Big]
   \end{align*}
 
 \newpage
