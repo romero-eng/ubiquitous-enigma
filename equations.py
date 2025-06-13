@@ -66,6 +66,7 @@ def plot_spectral_roots(spectral_roots: npt.NDArray[np.complex128]) -> None:
         ax.set_xlim([0, 0.5])
         ax.grid()
         ax.set_title(title)
+        ax.set_ylabel("Magnitude (dB)")
     fig.supxlabel("Digital Frequency (Hz)")
     fig.set_size_inches((8, 10))
     fig.set_layout_engine("tight")
