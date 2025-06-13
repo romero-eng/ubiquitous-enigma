@@ -42,7 +42,7 @@ def calculate_spectral_roots(spectral_roots: npt.NDArray[np.complex128]) -> npt.
 
     z_coefs: npt.NDArray[np.float64] = np.array([1])
 
-    for gamma in roots[np.angle(spectral_roots) >= 0]:
+    for gamma in spectral_roots[np.angle(spectral_roots) >= 0]:
         z_coefs = \
             np.convolve(z_coefs,
                         calculate_real_spectral_root(np.float64(np.real(gamma))) if np.angle(gamma) in [0, np.pi] else calculate_complex_spectral_root(gamma)).astype(np.float64)  # noqa: E501
