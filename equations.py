@@ -67,7 +67,7 @@ def plot_real_spectral_root(gamma: np.float64) -> None:
 
     z_coefs = np.array([1, -rho])/np.sqrt(2*rho_abs)
 
-    mag_sq_coefs = np.array([gamma_abs, -gamma_sign])
+    mag_sq_coefs = -gamma_sign*np.array([-gamma, 1])
 
     plot_mag_func(z_coefs, mag_sq_coefs)
 
