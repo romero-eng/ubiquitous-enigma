@@ -78,10 +78,13 @@ def plot_spectral_roots(spectral_roots: npt.NDArray[np.complex128]) -> None:
 
 if (__name__ == "__main__"):
 
+    offset = 1
+    f_e = 0.2
+    n = 4
+
+    root = np.sqrt(offset)*np.exp(1j*np.arccos(np.cos(2*np.pi*f_e)/np.sqrt(offset)))
+
     roots: npt.NDArray[np.complex128] = \
-        np.array([2*np.exp( 1j*(np.pi/180)*45),  # noqa: E201
-                  2*np.exp(-1j*(np.pi/180)*45),
-                  1.33611,
-                  -3])
+        np.array([root, np.conjugate(root)]*n)
 
     plot_spectral_roots(roots)
