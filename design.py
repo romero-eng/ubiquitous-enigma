@@ -13,26 +13,23 @@ matplotlib.use("Agg")  # flake8 suppression to deal with matplotlib's useage of 
 import matplotlib.pyplot as plt  # noqa: E402
 
 
-def plot_designed_spectrum(MA_spectral_roots: npt.NDArray[np.complex128]) -> None:
+def plot_designed_spectrum(MA_spectral_roots: list[np.complex128] = [],
+                           AR_spectral_roots: list[np.complex128] = []) -> None:
 
-    AR_spectral_roots = np.array([])
+    def calculate_spectral_magnitude(spectral_roots: npt.NDArray[np.complex128],
+                                     delta_freq) -> npt.NDArray[np.float64]:
+
+        return 5*np.log10(chebval(np.cos(2*np.pi*np.arange(0, 0.5 + delta_f, delta_f)),
+                                  np.pow(-1, np.sum(np.angle(spectral_roots) == 0))*np.real(chebfromroots(spectral_roots))))
 
     delta_f = 0.001
-    f = np.arange(0, 0.5 + delta_f, delta_f)
-
-    w = 2*np.pi*f
-    MA_sign = np.pow(-1, np.sum(np.angle(MA_spectral_roots) == 0))
-    AR_sign = np.pow(-1, np.sum(np.angle(AR_spectral_roots) == 0))
-    MA_cheb_coefs = MA_sign*np.real(chebfromroots(MA_spectral_roots))
-    AR_cheb_coefs = AR_sign*np.real(chebfromroots(AR_spectral_roots))
-    mag_dB = \
-        5*(np.log10(chebval(np.cos(w), MA_cheb_coefs)) -
-           np.log10(chebval(np.cos(w), AR_cheb_coefs)))
 
     png_filename = "actual.png"
     [fig, ax] = plt.subplots(1)
-    ax.plot(f, mag_dB)
-    ax.set_xlim([0, 0.5])
+    ax.plot(np.arange(0, 0.5 + delta_f, delta_f),
+            calculate_spectral_magnitude(np.array(MA_spectral_roots), delta_f) - \
+            calculate_spectral_magnitude(np.array(AR_spectral_roots), delta_f))
+    ax.set_xlim((0, 0.5))
     ax.grid()
     ax.set_ylabel("Magnitude (dB)")
     ax.set_xlabel("Digital Frequency (Hz)")
@@ -43,16 +40,26 @@ def plot_designed_spectrum(MA_spectral_roots: npt.NDArray[np.complex128]) -> Non
     subprocess.run(["feh", png_filename])
     os.remove(png_filename)
 
-
-if (__name__=="__main__"):
-
-    f_e = 0.2
-    target_offset_dB = -8
+def add_trough(f_e: np.float64,
+               target_offset_dB: np.float64,
+               roots: list[np.complex128],
+               order: int = 1) -> list[np.complex128]:
 
     offset = np.pow(10, target_offset_dB/5) + np.square(np.cos(2*np.pi*f_e))
     root = np.sqrt(offset)*np.exp(1j*np.arccos(np.cos(2*np.pi*f_e)/np.sqrt(offset)))
 
-    roots: npt.NDArray[np.complex128] = \
-        np.array([root, np.conjugate(root)])
+    roots += [root, np.conjugate(root)]*order
 
-    plot_designed_spectrum(roots) 
+    return roots
+
+
+if (__name__=="__main__"):
+
+    ma_roots: list[np.complex128] = []
+    ma_roots = add_trough(0.27 , 0, ma_roots, order = 4)
+
+    ar_roots: list[np.complex128] = []
+    ar_roots = add_trough(0.24, 0, ar_roots, order = 5)
+    ar_roots = add_trough(0.05, 0, ar_roots)
+
+    plot_designed_spectrum(ma_roots, ar_roots) 
