@@ -13,74 +13,117 @@ matplotlib.use("Agg")  # flake8 suppression to deal with matplotlib's useage of 
 import matplotlib.pyplot as plt  # noqa: E402
 
 
-def plot_designed_spectrum(MA_spectral_roots: list[np.complex128] = [],
-                           AR_spectral_roots: list[np.complex128] = []) -> None:
+class Spectrum:
 
-    def calculate_spectral_magnitude(spectral_roots: npt.NDArray[np.complex128],
-                                     delta_freq) -> npt.NDArray[np.float64]:
+    def __init__(self):
 
-        return 5*np.log10(chebval(np.cos(2*np.pi*np.arange(0, 0.5 + delta_f, delta_f)),
-                                  np.pow(-1, np.sum(np.angle(spectral_roots) == 0))*np.real(chebfromroots(spectral_roots))))
+        self._roots: list[np.complex128] = []
+        self._gain_dB: float = 0
+        self._overall_order: float = 1
 
-    delta_f = 0.001
+    def set_gain_dB(self,
+                    gain_dB: float) -> None:
 
-    png_filename = "actual.png"
-    [fig, ax] = plt.subplots(1)
-    ax.plot(np.arange(0, 0.5 + delta_f, delta_f),
-            calculate_spectral_magnitude(np.array(MA_spectral_roots), delta_f) - \
-            calculate_spectral_magnitude(np.array(AR_spectral_roots), delta_f))
-    ax.set_xlim((0, 0.5))
-    ax.grid()
-    ax.set_ylabel("Magnitude (dB)")
-    ax.set_xlabel("Digital Frequency (Hz)")
-    fig.set_size_inches((8, 5))
-    fig.set_layout_engine("tight")
-    fig.savefig(png_filename)
-    plt.close()
-    subprocess.run(["feh", png_filename])
-    os.remove(png_filename)
+        self._gain_dB = gain_dB
 
-def add_trough(f_e: np.float64,
-               target_offset_dB: np.float64,
-               roots: list[np.complex128],
-               order: int = 1) -> list[np.complex128]:
+    def set_overall_order(self,
+                          overall_order: float) -> None:
 
-    M = np.pow(10, target_offset_dB/10)
-    cos_omega_e = np.cos(2*np.pi*f_e)
+        self._overall_order = overall_order
 
-    gamma_mag = np.sqrt(np.square(M) + np.square(cos_omega_e))
-    quant = np.arctan(M/cos_omega_e)
-    gamma_angle = quant if f_e < 0.25 else np.pi - quant
-    gamma = gamma_mag*np.exp(1j*gamma_angle)
+    def add_downward_curvature(self,
+                               target_offset_dB: float,
+                               order: int = 1) -> None:
 
-    roots += [gamma, np.conjugate(gamma)]*order
+        gamma = -(1 + np.pow(10, target_offset_dB/5))
 
-    return roots
+        self._roots += [gamma]*order
+
+    def add_upward_curvature(self,
+                             target_offset_dB: float,
+                             order: int = 1) -> list[np.complex128]:
+
+        gamma = 1 + np.pow(10, target_offset_dB/5)
+
+        self._roots += [gamma]*order
+
+    def add_trough(self,
+                   f_e: np.float64,
+                   target_offset_dB: np.float64,
+                   order: int = 1) -> list[np.complex128]:
+
+        M = np.pow(10, target_offset_dB/10)
+        cos_omega_e = np.cos(2*np.pi*f_e)
+
+        gamma_mag = np.sqrt(np.square(M) + np.square(cos_omega_e))
+        quant = np.arctan(M/cos_omega_e)
+        gamma_angle = quant if f_e < 0.25 else np.pi - quant
+        gamma = gamma_mag*np.exp(1j*gamma_angle)
+
+        self._roots += [gamma, np.conjugate(gamma)]*order
+
+    def plot(self) -> None: 
+
+        delta_f = 0.001
+        f = np.arange(0, 0.5 + delta_f, delta_f)
+
+        spectral_roots: npt.NDArray[np.complex128] = np.array(self._roots)
+
+        png_filename = "actual.png"
+        [fig, ax] = plt.subplots(1)
+        ax.plot(f, self._overall_order*(self._gain_dB + 5*np.log10(chebval(np.cos(2*np.pi*f), np.pow(-1, np.sum(np.angle(spectral_roots) == 0))*np.real(chebfromroots(spectral_roots))))))
+        ax.set_xlim((0, 0.5))
+        ax.grid()
+        ax.set_ylabel("Magnitude (dB)")
+        ax.set_xlabel("Digital Frequency (Hz)")
+        fig.set_size_inches((8, 5))
+        fig.set_layout_engine("tight")
+        fig.savefig(png_filename)
+        plt.close()
+        subprocess.run(["feh", png_filename])
+        os.remove(png_filename)
 
 
 if (__name__=="__main__"):
 
-    """
-    ma_roots: list[np.complex128] = []
-    ma_roots = add_trough(0.27 , 0, ma_roots, order = 4)
-    ma_roots = add_trough(0.27 , 0, ma_roots, order = 4)
+    upward_curves = \
+        [(-10, 1),
+         ( -5, 1),
+         ( -1, 1)]
 
-    ar_roots: list[np.complex128] = []
-    ar_roots = add_trough(0.24, 0, ar_roots, order = 5)
-    ar_roots = add_trough(0.05, 0, ar_roots)
+    troughs = \
+        [(0.475, -26.00, 1),
+         (0.45 , -25.00, 1),
+         (0.425, -24.00, 1),
+         (0.4  , -23.00, 1),
+         (0.375, -22.00, 1),
+         (0.35 , -21.00, 1),
+         (0.325, -20.00, 1),
+         (0.3  , -10.00, 3),
+         (0.25 ,   9.00, 1),
+         (0.2  ,  -6.00, 2),
+         (0.18 ,   2.00, 1),
+         (0.15 ,  -6.50, 2),
+         (0.125,   1.00, 1),
+         (0.1  ,  -8.00, 1),
+         (0.05 , -11.00, 2),
+         (0.025,  -0.35, 2)]
 
-    plot_designed_spectrum(ma_roots, ar_roots)
-    """
+    downward_curves = \
+        [(-20, 1)]
 
-    ar_roots = []
-    #ar_roots = add_trough(0.15, -4, ar_roots)
-    ar_roots = add_trough(0.2, -3, ar_roots, 3)
-    ar_roots = add_trough(0.25, -12, ar_roots, 2)
+    ma_spectrum: Spectrum = Spectrum()
 
-    ma_roots = []
-    ma_roots = add_trough(0.45, -8, ma_roots, 2)
-    ma_roots = add_trough(0.4, -6, ma_roots, 2)
-    ma_roots = add_trough(0.35, -3, ma_roots, 2)
-    ma_roots = add_trough(0.3, -10, ma_roots, 2)
+    for (target_offset_dB, order) in upward_curves:
+        ma_spectrum.add_upward_curvature(target_offset_dB, order)
 
-    plot_designed_spectrum(ma_roots, ar_roots)
+    for (f_e, target_offset_dB, order) in troughs:
+        ma_spectrum.add_trough(f_e, target_offset_dB, order)
+
+    for (target_offset_dB, order) in downward_curves:
+        ma_spectrum.add_downward_curvature(target_offset_dB, order)
+
+    ma_spectrum.set_gain_dB(18)
+    ma_spectrum.set_overall_order(3)
+
+    ma_spectrum.plot()
