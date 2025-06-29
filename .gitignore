@@ -2,7 +2,6 @@
 *.swp
 *.aux
 *.log
-*.pdf
 view/
 
 # Python virtual environments
